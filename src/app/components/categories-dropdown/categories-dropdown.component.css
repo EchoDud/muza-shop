@@ -1,0 +1,83 @@
+.dropdown {
+  position: relative;
+  width: auto; /* Автоматическая ширина */
+}
+  
+  .dropdown__button {
+    background-color: #ff8c00;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+  
+  .dropdown__menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #f0f4f8;
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    z-index: 1000;
+  
+    /* Ограничиваем размеры */
+    max-width: 90vw; /* Максимальная ширина: 90% от ширины окна */
+    max-height: 80vh; /* Максимальная высота: 80% от высоты окна */
+    overflow: auto; /* Добавляем прокрутку при переполнении */
+  }
+  
+  .dropdown__menu--open {
+    display: block;
+  }
+  
+  .dropdown__item {
+    margin-bottom: 0.5rem;
+  }
+  
+  .dropdown__subcategories {
+    margin-left: 1rem;
+  }
+  
+  .category-item {
+    margin-left: 20px; /* Добавляем отступ для визуализации вложенности */
+    word-wrap: break-word; /* Разрыв длинных слов для предотвращения выхода за границы */
+  }
+  
+  .category-item > button {
+    display: block;
+    width: 100%;
+    text-align: left; /* Выровнять текст кнопки влево */
+    padding: 8px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .category-item > button:hover {
+    background-color: #f0f0f0; /* Легкий серый фон при наведении */
+  }
+  
+  .category-children {
+    margin-top: 5px;
+    margin-left: 15px; /* Дополнительный отступ для дочерних элементов */
+    border-left: 2px solid #ccc; /* Линия для обозначения вложенности */
+    padding-left: 10px;
+  }
+  
+  .category-children > .category-item:first-child {
+    margin-top: 10px; /* Отступ для первого дочернего элемента */
+  }
+
+  .category-item > button::before {
+    content: '▶';
+    display: inline-block;
+    margin-right: 8px;
+    transform: rotate(90deg); /* Повернуть стрелку, если нужно */
+    transition: transform 0.3s ease;
+  }
+  
+  .category-item > button:hover::before {
+    transform: rotate(0deg);
+  }
