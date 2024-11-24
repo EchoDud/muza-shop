@@ -4,18 +4,8 @@ import { Category } from '../../../shared/models/category.model';
 
 @Component({
   selector: 'app-category-item',
-  template: `
-    <div class="category-item">
-      <button>{{ category.name }}</button>
-      <div class="category-children" *ngIf="children.length > 0">
-        <ng-container *ngFor="let child of children">
-          <app-category-item [category]="child" [categories]="categories"></app-category-item>
-        </ng-container>
-      </div>
-    </div>
-
-  `,
-  styleUrls: ['../categories-dropdown.component.css'],
+  templateUrl: './category-item.component.html',
+  styleUrls: ['./category-item.component.css'],
   standalone: true,
   imports: [CommonModule],
 })

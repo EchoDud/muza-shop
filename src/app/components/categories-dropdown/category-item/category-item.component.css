@@ -1,0 +1,42 @@
+.category-item {
+    margin-left: 20px; /* Добавляем отступ для визуализации вложенности */
+    word-wrap: break-word; /* Разрыв длинных слов для предотвращения выхода за границы */
+  }
+  
+  .category-item > button {
+    display: block;
+    width: 100%;
+    text-align: left; /* Выровнять текст кнопки влево */
+    padding: 8px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .category-item > button:hover {
+    background-color: #f0f0f0; /* Легкий серый фон при наведении */
+  }
+  
+  .category-children {
+    margin-top: 5px;
+    margin-left: 15px; /* Дополнительный отступ для дочерних элементов */
+    border-left: 2px solid #ccc; /* Линия для обозначения вложенности */
+    padding-left: 10px;
+  }
+  
+  .category-children > .category-item:first-child {
+    margin-top: 10px; /* Отступ для первого дочернего элемента */
+  }
+
+  .category-item > button::before {
+    content: '▶';
+    display: inline-block;
+    margin-right: 8px;
+    transform: rotate(90deg); /* Повернуть стрелку, если нужно */
+    transition: transform 0.3s ease;
+  }
+  
+  .category-item > button:hover::before {
+    transform: rotate(0deg);
+  }
