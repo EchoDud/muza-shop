@@ -1,6 +1,9 @@
-.category-item {
-    margin-left: 20px; /* Добавляем отступ для визуализации вложенности */
-    word-wrap: break-word; /* Разрыв длинных слов для предотвращения выхода за границы */
+.category-item {    
+    word-wrap: break-word;
+    max-width: fit-content;
+
+    width: 40vw;
+    
   }
   
   .category-item > button {
