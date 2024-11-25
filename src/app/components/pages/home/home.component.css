@@ -10,10 +10,12 @@
     padding: 2rem;
   }
 
+  
+
   app-product-list{
     width: 100%; /* Контейнер занимает всю ширину экрана */
     margin: 0 auto; /* Центрируем, если max-width ограничен */
-    padding: 16px; /* Внутренние отступы */
+    padding-left: 1.5rem;  /*Внутренние отступы */
     box-sizing: border-box; /* Учитываем отступы в ширине */
   }
   
