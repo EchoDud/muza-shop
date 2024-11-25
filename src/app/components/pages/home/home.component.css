@@ -5,8 +5,16 @@
   }
   
   .layout__content {
-    flex: 1;
-    padding: 1rem;
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+  }
+
+  app-product-list{
+    width: 100%; /* Контейнер занимает всю ширину экрана */
+    margin: 0 auto; /* Центрируем, если max-width ограничен */
+    padding: 16px; /* Внутренние отступы */
+    box-sizing: border-box; /* Учитываем отступы в ширине */
   }
   
   .layout__footer {
@@ -15,4 +23,3 @@
     text-align: center;
     padding: 1rem 0;
   }
-  

@@ -1,0 +1,25 @@
+<div class="product-list">
+  <div
+    class="product-item"
+    *ngFor="let product of products"
+    (click)="onProductClick(product)"
+  >
+    <div class="product-image">
+      <ng-container *ngIf="product.imageUrl; else noImage">
+        <img [src]="product.imageUrl" alt="{{ product.model }}" />
+      </ng-container>
+      <ng-template #noImage>
+        <div class="no-image">Нет изображения</div>
+      </ng-template>
+    </div>
+    <div class="product-info">
+      <h3>{{ product.brand }} {{ product.model }}</h3>
+      <p>Цвет: {{ product.color }}</p>
+      <p>{{ product.description }}</p>
+      <p class="price">{{ product.price | currency: 'RUB' }}</p>
+      <button class="buy-button" (click)="onBuyClick(product); $event.stopPropagation()">
+        Купить
+      </button>
+    </div>
+  </div>
+</div>

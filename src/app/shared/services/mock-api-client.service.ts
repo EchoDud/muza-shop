@@ -8,6 +8,7 @@ import { Category } from '../models/category.model';
   providedIn: 'root', // Автоматическая регистрация провайдера
 })
 export class MockApiClientService implements ICategoryApiClient {
+  
   getCategories(): Observable<Category[]> {
     return of(categories);
   }
