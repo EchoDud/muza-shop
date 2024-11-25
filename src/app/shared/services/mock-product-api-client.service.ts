@@ -14,7 +14,7 @@ export class MockProductApiClientService implements ProductApiClient {
       color: 'Sunburst',
       description: 'Классическая электрогитара с уникальным звучанием.',
       price: 120000,
-      imageUrl: '',
+      imageUrl: 'https://images.musicstore.de/images/0960/fender-player-ii-stratocaster-rw-3-color-sunburst_1_GIT0061901-001.jpg',
       categoryId: 2,
     },
     {
