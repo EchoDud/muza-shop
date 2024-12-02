@@ -1,7 +1,7 @@
 <div class="product-list">
   <div
     class="product-item"
-    *ngFor="let product of products"
+    *ngFor="let product of filteredProducts"
     (click)="onProductClick(product)"
   >
     <div class="product-image">
@@ -17,7 +17,10 @@
       <p>Цвет: {{ product.color }}</p>
       <p>{{ product.description }}</p>
       <p class="price">{{ product.price | currency: 'RUB' }}</p>
-      <button class="buy-button" (click)="onBuyClick(product); $event.stopPropagation()">
+      <button
+        class="buy-button"
+        (click)="onBuyClick(product); $event.stopPropagation()"
+      >
         Купить
       </button>
     </div>

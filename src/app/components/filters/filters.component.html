@@ -1,32 +1,36 @@
 <div class="filters">
   <h3>Фильтры</h3>
-  
-  <!-- Фильтр по категориям -->
+
+  <!-- Фильтр по брендам -->
   <div class="filter-group">
-    <label for="category-filter">Категория:</label>
-    <select id="category-filter">
-      <option value="all">Все</option>
-      <option value="string">Струнные</option>
-      <option value="drums">Ударные</option>
-      <option value="keys">Клавишные</option>
-      <option value="wind">Духовые</option>
-      <option value="other">Прочее</option>
-    </select>
+    <h4>Бренды:</h4>
+    <ul class="brand-list">
+      <li *ngFor="let brand of displayedBrands">
+        <label>
+          <input
+            type="checkbox"
+            [checked]="isChecked(brand)"
+            (change)="toggleBrand(brand)"
+          />
+          {{ brand === 'all' ? 'Все' : brand }}
+        </label>
+      </li>
+    </ul>
   </div>
 
   <!-- Фильтр по цене -->
   <div class="filter-group">
     <label for="price-min">Цена от:</label>
-    <input type="number" id="price-min" placeholder="Минимум" />
+    <input type="number" id="price-min" [(ngModel)]="priceMin" />
   </div>
   <div class="filter-group">
     <label for="price-max">Цена до:</label>
-    <input type="number" id="price-max" placeholder="Максимум" />
+    <input type="number" id="price-max" [(ngModel)]="priceMax" />
   </div>
 
-  <!-- Кнопка применения фильтров -->
+  <!-- Кнопки применения и сброса фильтров -->
   <div class="filter-actions">
-    <button class="apply-button">Применить</button>
-    <button class="reset-button">Сбросить</button>
+    <button class="apply-button" (click)="onApply()">Применить</button>
+    <button class="reset-button" (click)="onReset()">Сбросить</button>
   </div>
 </div>
