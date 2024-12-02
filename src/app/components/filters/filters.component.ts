@@ -12,68 +12,84 @@ import { FilterStateService } from '../../shared/services/filter-state.service';
 })
 export class FiltersComponent {
   @Input() availableBrands: string[] = [];
+  @Input() availableCategories: string[] = [];
+  @Input() availableModels: string[] = [];
+  @Input() availableColors: string[] = [];
   @Output() applyFilters = new EventEmitter();
 
+  displayedCategories: string[] = [];
   displayedBrands: string[] = [];
+  displayedModels: string[] = [];
+  displayedColors: string[] = [];
+  selectedCategories: string[] = ['all'];
   selectedBrands: string[] = ['all'];
+  selectedModels: string[] = ['all'];
+  selectedColors: string[] = ['all'];
   priceMin: number | null = null;
   priceMax: number | null = null;
 
   constructor(private filterState: FilterStateService) {}
 
   ngOnChanges(): void {
-    this.updateDisplayedBrands();
+    this.updateDisplayedOptions();
   }
 
-  updateDisplayedBrands(): void {
-    const selectedSet = new Set(this.selectedBrands);
-    const nonSelected = this.availableBrands.filter((brand) => !selectedSet.has(brand));
-
-    this.displayedBrands = ['all', ...this.selectedBrands.filter((b) => b !== 'all'), ...nonSelected];
+  updateDisplayedOptions(): void {
+    this.displayedCategories = this.updateDisplayedList(this.availableCategories, this.selectedCategories);
+    this.displayedBrands = this.updateDisplayedList(this.availableBrands, this.selectedBrands);
+    this.displayedModels = this.updateDisplayedList(this.availableModels, this.selectedModels);
+    this.displayedColors = this.updateDisplayedList(this.availableColors, this.selectedColors);
   }
 
-  isChecked(brand: string): boolean {
-    return this.selectedBrands.includes(brand);
+  updateDisplayedList(available: string[], selected: string[]): string[] {
+    const selectedSet = new Set(selected);
+    const nonSelected = available.filter((item) => !selectedSet.has(item));
+    return ['all', ...selected.filter((item) => item !== 'all'), ...nonSelected];
   }
 
-  toggleBrand(brand: string): void {
-    if (brand === 'all') {
-      this.selectedBrands = ['all'];
+  toggleSelection(value: string, selectedList: string[]): void {
+    if (value === 'all') {
+      selectedList.length = 0;
+      selectedList.push('all');
     } else {
-      const index = this.selectedBrands.indexOf(brand);
+      const index = selectedList.indexOf(value);
       if (index > -1) {
-        this.selectedBrands.splice(index, 1);
+        selectedList.splice(index, 1);
       } else {
-        this.selectedBrands.push(brand);
+        selectedList.push(value);
       }
-
-      if (this.selectedBrands.length === 0) {
-        this.selectedBrands.push('all');
+      if (selectedList.length === 0) {
+        selectedList.push('all');
       } else {
-        const allIndex = this.selectedBrands.indexOf('all');
+        const allIndex = selectedList.indexOf('all');
         if (allIndex > -1) {
-          this.selectedBrands.splice(allIndex, 1);
+          selectedList.splice(allIndex, 1);
         }
       }
     }
-
-    this.updateDisplayedBrands();
+    this.updateDisplayedOptions();
   }
 
   onApply(): void {
     this.filterState.updateFilters({
+      category: this.selectedCategories,
+      brand: this.selectedBrands,
+      model: this.selectedModels,
+      color: this.selectedColors,
       priceMin: this.priceMin,
       priceMax: this.priceMax,
-      brand: this.selectedBrands,
     });
     this.applyFilters.emit();
   }
 
   onReset(): void {
     this.filterState.resetFilters();
+    this.selectedCategories = ['all'];
     this.selectedBrands = ['all'];
+    this.selectedModels = ['all'];
+    this.selectedColors = ['all'];
     this.priceMin = null;
     this.priceMax = null;
-    this.updateDisplayedBrands();
+    this.updateDisplayedOptions();
   }
 }

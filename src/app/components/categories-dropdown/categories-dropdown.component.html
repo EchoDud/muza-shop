@@ -2,7 +2,11 @@
   <button (click)="toggleDropdown()" class="dropdown__button">Категории</button>
   <div class="dropdown__menu" [class.dropdown__menu--open]="isDropdownOpen">
     <ng-container *ngFor="let parent of getRootCategories()">
-      <app-category-item [category]="parent" [categories]="categories"></app-category-item>
+      <app-category-item
+        [category]="parent"
+        [categories]="categories"
+        (categorySelected)="onCategorySelect($event)">
+      </app-category-item>
     </ng-container>
   </div>
 </div>

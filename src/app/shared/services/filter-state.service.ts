@@ -6,10 +6,12 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class FilterStateService {
   private filters = {
-    category: 'all',
+    category: ['all'] as string[],
+    brand: ['all'] as string[],
+    model: ['all'] as string[],
+    color: ['all'] as string[],
     priceMin: null as number | null,
     priceMax: null as number | null,
-    brand: ['all'] as string[], // Изменено на массив строк
   };
 
   private filterStateSubject = new BehaviorSubject(this.filters);
@@ -22,10 +24,12 @@ export class FilterStateService {
 
   resetFilters() {
     this.filters = {
-      category: 'all',
+      category: ['all'],
+      brand: ['all'],
+      model: ['all'],
+      color: ['all'],
       priceMin: null,
       priceMax: null,
-      brand: ['all'], // Изменено на массив строк
     };
     this.filterStateSubject.next(this.filters);
   }

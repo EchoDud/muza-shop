@@ -1,24 +1,75 @@
 <div class="filters">
   <h3>Фильтры</h3>
 
-  <!-- Фильтр по брендам -->
+  <!-- Категории -->
   <div class="filter-group">
-    <h4>Бренды:</h4>
+    <h4>Категории:</h4>
     <ul class="brand-list">
-      <li *ngFor="let brand of displayedBrands">
+      <li *ngFor="let category of displayedCategories">
         <label>
+          <span>{{ category === 'all' ? 'Все' : category }}</span>
           <input
             type="checkbox"
-            [checked]="isChecked(brand)"
-            (change)="toggleBrand(brand)"
+            [checked]="selectedCategories.includes(category)"
+            (change)="toggleSelection(category, selectedCategories)"
           />
-          {{ brand === 'all' ? 'Все' : brand }}
         </label>
       </li>
     </ul>
   </div>
 
-  <!-- Фильтр по цене -->
+  <!-- Бренды -->
+  <div class="filter-group">
+    <h4>Бренды:</h4>
+    <ul class="brand-list">
+      <li *ngFor="let brand of displayedBrands">
+        <label>
+          <span>{{ brand === 'all' ? 'Все' : brand }}</span>
+          <input
+            type="checkbox"
+            [checked]="selectedBrands.includes(brand)"
+            (change)="toggleSelection(brand, selectedBrands)"
+          />
+        </label>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Модели -->
+  <div class="filter-group">
+    <h4>Модели:</h4>
+    <ul class="brand-list">
+      <li *ngFor="let model of displayedModels">
+        <label>
+          <span>{{ model === 'all' ? 'Все' : model }}</span>
+          <input
+            type="checkbox"
+            [checked]="selectedModels.includes(model)"
+            (change)="toggleSelection(model, selectedModels)"
+          />
+        </label>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Цвета -->
+  <div class="filter-group">
+    <h4>Цвета:</h4>
+    <ul class="brand-list">
+      <li *ngFor="let color of displayedColors">
+        <label>
+          <span>{{ color === 'all' ? 'Все' : color }}</span>
+          <input
+            type="checkbox"
+            [checked]="selectedColors.includes(color)"
+            (change)="toggleSelection(color, selectedColors)"
+          />
+        </label>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Цена -->
   <div class="filter-group">
     <label for="price-min">Цена от:</label>
     <input type="number" id="price-min" [(ngModel)]="priceMin" />
@@ -28,9 +79,9 @@
     <input type="number" id="price-max" [(ngModel)]="priceMax" />
   </div>
 
-  <!-- Кнопки применения и сброса фильтров -->
+  <!-- Кнопки -->
   <div class="filter-actions">
-    <button class="apply-button" (click)="onApply()">Применить</button>
-    <button class="reset-button" (click)="onReset()">Сбросить</button>
+    <button (click)="onApply()">Применить</button>
+    <button (click)="onReset()">Сбросить</button>
   </div>
 </div>

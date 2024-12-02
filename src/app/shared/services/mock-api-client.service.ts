@@ -8,51 +8,58 @@ import { Category } from '../models/category.model';
 })
 export class MockApiClientService implements ICategoryApiClient {
   private categories: Category[] = [
-    // Основные категории инструментов
     { id: 1, name: 'Струнные', parentId: null },
     { id: 2, name: 'Гитары', parentId: 1 },
     { id: 3, name: 'Электрогитары', parentId: 2 },
     { id: 4, name: 'Акустические гитары', parentId: 2 },
-    { id: 5, name: 'Классические гитары', parentId: 2 },
-    { id: 6, name: 'Бас-гитары', parentId: 2 },
-    { id: 7, name: 'Арфы', parentId: 1 },
-    { id: 8, name: 'Скрипки', parentId: 1 },
-    { id: 9, name: 'Виолончели', parentId: 1 },
-    { id: 10, name: 'Контрабасы', parentId: 1 },
-
-    { id: 11, name: 'Ударные', parentId: null },
-    { id: 12, name: 'Барабаны', parentId: 11 },
-    { id: 13, name: 'Тарелки', parentId: 11 },
-    { id: 14, name: 'Электронные ударные установки', parentId: 11 },
-    { id: 15, name: 'Палки для барабанов', parentId: 11 },
-
-    { id: 16, name: 'Клавишные', parentId: null },
-    { id: 17, name: 'Пианино', parentId: 16 },
-    { id: 18, name: 'Синтезаторы', parentId: 16 },
-    { id: 19, name: 'Органы', parentId: 16 },
-    { id: 20, name: 'Цифровые фортепиано', parentId: 16 },
-
-    { id: 21, name: 'Духовые', parentId: null },
-    { id: 22, name: 'Трубачи', parentId: 21 },
-    { id: 23, name: 'Саксофоны', parentId: 21 },
-    { id: 24, name: 'Тромбоны', parentId: 21 },
-    { id: 25, name: 'Флейты', parentId: 21 },
-    { id: 26, name: 'Кларнеты', parentId: 21 },
+    { id: 5, name: 'Бас-гитары', parentId: 2 },
+    { id: 6, name: 'Смычковые', parentId: 1 },
+    { id: 7, name: 'Скрипки', parentId: 6 },
+    { id: 8, name: 'Виолончели', parentId: 6 },
+    { id: 9, name: 'Контрабасы', parentId: 6 },
     
-    { id: 27, name: 'Прочее', parentId: null },
-    { id: 28, name: 'Микрофоны', parentId: 27 },
-    { id: 29, name: 'Акустические системы', parentId: 27 },
-    { id: 30, name: 'Процессоры эффектов', parentId: 27 },
-    { id: 31, name: 'Тюнеры', parentId: 27 },
-
-    { id: 32, name: 'Муз. аксессуары', parentId: null },
-    { id: 33, name: 'Чехлы и сумки для инструментов', parentId: 32 },
-    { id: 34, name: 'Стойки для инструментов', parentId: 32 },
-    { id: 35, name: 'Кабели и адаптеры', parentId: 32 },
-    { id: 36, name: 'Педали для эффектов', parentId: 32 },
+    { id: 10, name: 'Ударные', parentId: null },
+    { id: 11, name: 'Барабаны', parentId: 10 },
+    { id: 12, name: 'Тарелки', parentId: 10 },
+    { id: 13, name: 'Электронные ударные установки', parentId: 10 },
+  
+    { id: 14, name: 'Клавишные', parentId: null },
+    { id: 15, name: 'Пианино', parentId: 14 },
+    { id: 16, name: 'Синтезаторы', parentId: 14 },
+    { id: 17, name: 'Цифровые фортепиано', parentId: 14 },
+  
+    { id: 18, name: 'Духовые', parentId: null },
+    { id: 19, name: 'Трубы', parentId: 18 },
+    { id: 20, name: 'Саксофоны', parentId: 18 },
+    { id: 21, name: 'Флейты', parentId: 18 },
+  
+    { id: 22, name: 'Аксессуары', parentId: null },
+    { id: 23, name: 'Чехлы для инструментов', parentId: 22 },
+    { id: 24, name: 'Струны', parentId: 22 },
+    { id: 25, name: 'Медиаторы', parentId: 22 },
+    { id: 26, name: 'Стойки', parentId: 22 },
+  
+    { id: 27, name: 'Оборудование', parentId: null },
+    { id: 28, name: 'Комбоусилители', parentId: 27 },
+    { id: 29, name: 'Микрофоны', parentId: 27 },
+    { id: 30, name: 'Микшерные пульты', parentId: 27 },
   ];
 
   getCategories(): Observable<Category[]> {
     return of(this.categories);
   }
+
+  getChildCategories(parentId: number): number[] {
+    const result: number[] = [];
+    const collectChildren = (id: number) => {
+      const children = this.categories.filter(cat => cat.parentId === id);
+      for (const child of children) {
+        result.push(child.id);
+        collectChildren(child.id); // Рекурсивно добавляем дочерние элементы
+      }
+    };
+    collectChildren(parentId);
+    return result;
+  }
+  
 }

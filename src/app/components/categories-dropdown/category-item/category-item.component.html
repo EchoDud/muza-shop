@@ -1,8 +1,12 @@
 <div class="category-item">
-    <button>{{ category.name }}</button>
-    <div class="category-children" *ngIf="children.length > 0">
-      <ng-container *ngFor="let child of children">
-        <app-category-item [category]="child" [categories]="categories"></app-category-item>
-      </ng-container>
-    </div>
+  <button (click)="onSelect()">{{ category.name }}</button>
+  <div class="category-children" *ngIf="children.length > 0">
+    <ng-container *ngFor="let child of children">
+      <app-category-item
+        [category]="child"
+        [categories]="categories"
+        (categorySelected)="categorySelected.emit($event)">
+      </app-category-item>
+    </ng-container>
   </div>
+</div>
