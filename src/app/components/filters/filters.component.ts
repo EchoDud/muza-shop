@@ -30,6 +30,13 @@ export class FiltersComponent {
 
   constructor(private filterState: FilterStateService) {}
 
+  ngOnInit(): void {
+    this.filterState.filterState$.subscribe((filters) => {
+      this.selectedCategories = filters.category;
+      this.updateDisplayedOptions();
+    });
+  }
+
   ngOnChanges(): void {
     this.updateDisplayedOptions();
   }

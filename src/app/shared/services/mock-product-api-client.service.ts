@@ -44,4 +44,9 @@ export class MockProductApiClientService implements ProductApiClient {
   async getProducts(): Promise<Product[]> {
     return this.products;
   }
+
+  getProductById(id: number): Promise<Product | null> {
+    const product = this.products.find((p) => p.id === id);
+    return Promise.resolve(product || null);
+  }
 }

@@ -36,17 +36,16 @@ export class CategoriesDropdownComponent implements OnInit {
   }
 
   onCategorySelect(categoryId: number): void {
-    const selectedCategories = [categoryId, ...this.apiClient.getChildCategories(categoryId)];
-    const categoryNames = selectedCategories
+    const selectedCategories = [categoryId, ...this.apiClient.getChildCategories(categoryId)]
       .map(id => this.categories.find(cat => cat.id === id)?.name)
       .filter(name => name) as string[];
 
-    // Обновляем фильтры в сервисе
-    this.filterState.updateFilters({ category: categoryNames });
+    // Обновляем категории в сервисе
+    this.filterState.updateCategoryFilters(selectedCategories);
 
     // Закрываем дропдаун
     this.isDropdownOpen = false;
 
-    console.log('Selected categories:', categoryNames);
+    console.log('Selected categories:', selectedCategories);
   }
 }

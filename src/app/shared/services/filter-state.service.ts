@@ -33,4 +33,9 @@ export class FilterStateService {
     };
     this.filterStateSubject.next(this.filters);
   }
+
+  // Новый метод для обновления только категории
+  updateCategoryFilters(categories: string[]) {
+    this.updateFilters({ category: categories });
+  }
 }
