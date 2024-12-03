@@ -1,0 +1,20 @@
+<div class="search">
+  <input
+    type="text"
+    [(ngModel)]="query"
+    (input)="onSearch()"
+    class="search__input"
+    placeholder="Поиск товаров..."
+  />
+  <div class="search__results" *ngIf="searchResults.length > 0">
+    <ul>
+      <li
+        *ngFor="let product of searchResults"
+        (click)="onProductClick(product.id)"
+      >
+        <img [src]="product.imageUrl" alt="{{ 'None' }}" class="result__image" />
+        <span>{{ product.brand }} {{ product.model }} ({{ product.color }})</span>
+      </li>
+    </ul>
+  </div>
+</div>

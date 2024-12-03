@@ -1,0 +1,55 @@
+.search {
+  position: relative;
+  flex-grow: 1; /* Расширяем поле поиска, чтобы оно занимало доступное пространство */
+  margin-left: 2rem; /* Отступы для размещения в центре */
+  margin-right: 2rem;
+  
+}
+
+.search__input {
+  width: 100%; /* Поле занимает всю ширину контейнера */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.search__results {
+  position: absolute; /* Абсолютное позиционирование, чтобы результаты отображались поверх остальных элементов */
+  top: 110%; /* Смещение вниз относительно поля ввода */
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  max-height: 200px; /* Ограничение высоты списка */
+  overflow-y: auto;
+  z-index: 10; /* Результаты отображаются поверх других элементов */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.search__results ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.search__results li {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.search__results li:hover {
+  background: #f9f9f9;
+}
+
+.result__image {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  margin-right: 10px;
+  border-radius: 4px;
+}

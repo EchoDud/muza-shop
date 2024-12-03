@@ -12,36 +12,22 @@
   font-size: 1.5rem;
   font-weight: bold;
   color: #333;
+  margin-right: 2rem; /* Отступ справа от логотипа */
 }
 
 .header__search {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  flex-grow: 1;
-  margin-left: 2rem;
-  margin-right: 2rem;
+  flex-grow: 1; /* Расширяем поле поиска */
+  margin-right: 2rem; /* Отступ справа от поиска */
 }
 
 .search__input {
-  flex-grow: 1;
-  padding: 0.5rem 1rem;
+  width: 100%; /* Поле ввода занимает всё доступное пространство */
+  padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1rem;
-}
-
-.search__button {
-  padding: 0.5rem 1rem;
-  background-color: #ff8c00;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.search__button:hover {
-  background-color: #e67600;
 }
 
 .header__buttons {
@@ -56,16 +42,20 @@
   border: none;
   border-radius: 4px;
   font-size: 1rem;
-  cursor: pointer;
+  cursor: pointer;  
 }
+
 
 .header__button:hover {
   background-color: #e67600;
 }
 
-  app-categories-dropdown {
-    padding-left: 1rem;
-    margin-right: auto; 
-  }
-  
-  
+app-categories-dropdown {
+  margin-right: auto; /* Двигает дропдаун влево, позволяя остальным элементам занять доступное пространство */
+}
+
+app-search{
+  margin-right: auto;
+  width: 75%;
+}
+
