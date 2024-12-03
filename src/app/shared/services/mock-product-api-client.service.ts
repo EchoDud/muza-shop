@@ -8,7 +8,7 @@ import { Product } from '../models/product.model';
 export class MockProductApiClientService implements ProductApiClient {
   private products: Product[] = [
     // Струнные
-  { id: 1, brand: 'Fender', model: 'Player Stratocaster', color: 'Sunburst', description: 'Идеальный выбор для начинающих и профессионалов.', price: 120000, imageUrl: '', categoryId: 3 },
+  { id: 1, brand: 'Fender', model: 'Player Stratocaster', color: 'Sunburst', description: 'Идеальный выбор для начинающих и профессионалов.', price: 120000, imageUrl: 'https://images.musicstore.de/images/1280/fender-player-plus-stratocaster-hss-mn-3-color-sunburst_1_GIT0056958-000.jpg', categoryId: 3 },
   { id: 2, brand: 'Gibson', model: 'Les Paul Standard', color: 'Cherry', description: 'Классика рока.', price: 150000, imageUrl: '', categoryId: 3 },
   { id: 3, brand: 'Yamaha', model: 'FG800', color: 'Natural', description: 'Акустическая гитара с отличным звучанием.', price: 25000, imageUrl: '', categoryId: 4 },
   { id: 4, brand: 'Ibanez', model: 'SR300E', color: 'Metallic Gray', description: 'Бас-гитара для всех жанров.', price: 70000, imageUrl: '', categoryId: 5 },

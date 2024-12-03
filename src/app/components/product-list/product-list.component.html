@@ -17,10 +17,7 @@
       <p>Цвет: {{ product.color }}</p>
       <p>{{ product.description }}</p>
       <p class="price">{{ product.price | currency: 'RUB' }}</p>
-      <button
-        class="buy-button"
-        (click)="onBuyClick(product); $event.stopPropagation()"
-      >
+      <button class="buy-button" (click)="onBuyClick(product); $event.stopPropagation()">
         Купить
       </button>
     </div>

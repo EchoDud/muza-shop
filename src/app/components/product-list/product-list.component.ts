@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MockProductApiClientService } from '../../shared/services/mock-product-api-client.service';
 import { Product } from '../../shared/models/product.model';
@@ -22,7 +23,8 @@ export class ProductListComponent implements OnInit {
   constructor(
     private productApiClient: MockProductApiClientService,
     private categoryApiClient: MockApiClientService,
-    private filterState: FilterStateService
+    private filterState: FilterStateService,
+    private router: Router
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -59,9 +61,7 @@ export class ProductListComponent implements OnInit {
     });
   }
   onProductClick(product: Product): void {
-    console.log('Товар выбран:', product);
-    // Здесь можно реализовать переход на страницу товара:
-    // this.router.navigate(['/product', product.id]);
+    this.router.navigate(['/product', product.id]); // Переход на страницу товара
   }
 
   onBuyClick(product: Product): void {

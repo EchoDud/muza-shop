@@ -1,0 +1,13 @@
+<div *ngIf="product" class="product-page">
+    <h1>{{ product.brand }} {{ product.model }}</h1>
+    <img [src]="product.imageUrl" alt="{{ 'Нет изображения' }}" class="product-image" />
+    <p><strong>Категория:</strong> {{ product.categoryId }}</p>
+    <p><strong>Цвет:</strong> {{ product.color }}</p>
+    <p><strong>Описание:</strong> {{ product.description }}</p>
+    <p><strong>Цена:</strong> {{ product.price | currency: 'RUB' }}</p>
+    <button class="buy-button">Купить</button>
+  </div>
+  <div *ngIf="!product" class="loading">
+    Загрузка товара...
+  </div>
+  
