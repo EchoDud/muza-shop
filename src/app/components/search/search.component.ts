@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { MockProductApiClientService } from '../../shared/services/mock-product-api-client.service';
+import { ProductService } from '../../shared/services/product-api-client.service';
 import { Product } from '../../shared/models/product.model';
 import { FormsModule } from '@angular/forms';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-search',
@@ -19,7 +20,7 @@ export class SearchComponent {
   @Output() productSelected = new EventEmitter<number>(); // Для перехода на страницу товара
 
   constructor(
-    private productService: MockProductApiClientService,
+    private productService: ProductService,
     private router: Router
   ) {}
 
@@ -28,11 +29,11 @@ export class SearchComponent {
       this.searchResults = [];
       return;
     }
-
-    const products = await this.productService.getProducts();
+  
+    const products = await firstValueFrom(this.productService.getProducts());
     const queryLower = this.query.toLowerCase();
-
-    // Фильтрация по бренду и/или модели
+  
+    // Фильтрация массива
     this.searchResults = products.filter(
       (product) =>
         product.brand.toLowerCase().includes(queryLower) ||

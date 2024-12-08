@@ -6,7 +6,7 @@ import { Category } from '../models/category.model';
 @Injectable({
   providedIn: 'root', // Автоматическая регистрация провайдера
 })
-export class MockApiClientService implements ICategoryApiClient {
+export class MockApiClienttService implements ICategoryApiClient {
   private categories: Category[] = [
     { id: 1, name: 'Струнные', parentId: null },
     { id: 2, name: 'Гитары', parentId: 1 },

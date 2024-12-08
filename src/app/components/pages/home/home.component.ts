@@ -5,17 +5,17 @@ import { FiltersComponent } from '../../filters/filters.component';
 import { ProductListComponent } from '../../product-list/product-list.component';
 import { FilterStateService } from '../../../shared/services/filter-state.service';
 import { Product } from '../../../shared/models/product.model';
-import { MockProductApiClientService } from '../../../shared/services/mock-product-api-client.service';
+import { ProductService } from '../../../shared/services/product-api-client.service';
 import { Category } from '../../../shared/models/category.model';
-import { MockApiClientService } from '../../../shared/services/mock-api-client.service';
-
+import { CategoryService } from '../../../shared/services/category-api-client.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  imports: [ HeaderComponent, RouterModule, FiltersComponent, ProductListComponent ],
+  imports: [HeaderComponent, RouterModule, FiltersComponent, ProductListComponent],
 })
 export class HomeComponent implements OnInit {
   products: Product[] = [];
@@ -26,34 +26,29 @@ export class HomeComponent implements OnInit {
   availableColors: string[] = [];
 
   constructor(
-    private productApiClient: MockProductApiClientService,
-    private categoryApiClient: MockApiClientService
+    private productService: ProductService,
+    private categoryService: CategoryService
   ) {}
 
   async ngOnInit(): Promise<void> {
-    // Загрузка продуктов
-    this.products = await this.productApiClient.getProducts();
-
-    // Загрузка категорий
-    this.categoryApiClient.getCategories().subscribe((categories) => {
+    // Используем `firstValueFrom` для получения данных из Observable
+    this.products = await firstValueFrom(this.productService.getProducts());
+  
+    this.categoryService.getCategories().subscribe((categories) => {
       this.categories = categories;
-
-      // Преобразуем категории: сопоставляем id -> name
+  
       const categoryMap = new Map(categories.map((cat) => [cat.id, cat.name]));
-
-      // Уникальные категории для фильтра
       this.availableCategories = [
         ...new Set(this.products.map((p) => categoryMap.get(p.categoryId))),
       ].filter((name) => name !== undefined) as string[];
-
+  
       console.log('Available categories:', this.availableCategories);
     });
-
-    // Уникальные бренды, модели и цвета
+  
     this.availableBrands = [...new Set(this.products.map((p) => p.brand))];
     this.availableModels = [...new Set(this.products.map((p) => p.model))];
     this.availableColors = [...new Set(this.products.map((p) => p.color))];
-
+  
     console.log('Available brands:', this.availableBrands);
     console.log('Available models:', this.availableModels);
     console.log('Available colors:', this.availableColors);
@@ -63,4 +58,3 @@ export class HomeComponent implements OnInit {
     console.log('Filters applied');
   }
 }
-

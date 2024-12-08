@@ -5,7 +5,7 @@ import { Product } from '../models/product.model';
 @Injectable({
   providedIn: 'root',
 })
-export class MockProductApiClientService implements ProductApiClient {
+export class MockProductApiClienttService implements ProductApiClient {
   private products: Product[] = [
     // Струнные
   { id: 1, brand: 'Fender', model: 'Player Stratocaster', color: 'Sunburst', description: 'Идеальный выбор для начинающих и профессионалов.', price: 120000, imageUrl: 'https://images.musicstore.de/images/1280/fender-player-plus-stratocaster-hss-mn-3-color-sunburst_1_GIT0056958-000.jpg', categoryId: 3 },

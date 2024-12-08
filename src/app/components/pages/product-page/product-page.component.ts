@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { MockProductApiClientService } from '../../../shared/services/mock-product-api-client.service';
+import { ProductService } from '../../../shared/services/product-api-client.service';
 import { Product } from '../../../shared/models/product.model';
-import { MockApiClientService } from '../../../shared/services/mock-api-client.service';
+import { CategoryService } from '../../../shared/services/category-api-client.service';
 import { Category } from '../../../shared/models/category.model';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-product-page',
@@ -20,23 +21,20 @@ export class ProductPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private productService: MockProductApiClientService,
-    private categoryService: MockApiClientService // Сервис для категорий
+    private productService: ProductService,
+    private categoryService: CategoryService
   ) {}
 
   async ngOnInit(): Promise<void> {
     const id = this.route.snapshot.paramMap.get('id');
-
-    // Загружаем категории и создаем карту ID -> Название
+  
     this.categoryService.getCategories().subscribe((categories: Category[]) => {
-      this.categoryMap = new Map(categories.map(cat => [cat.id, cat.name]));
+      this.categoryMap = new Map(categories.map((cat) => [cat.id, cat.name]));
     });
-
-    // Загружаем продукт по ID
+  
     if (id) {
-      this.product = await this.productService.getProductById(+id);
+      this.product = await firstValueFrom(this.productService.getProductById(+id));
       if (this.product) {
-        // Получаем название категории
         this.categoryName = this.categoryMap.get(this.product.categoryId) || 'Неизвестная категория';
       }
     }

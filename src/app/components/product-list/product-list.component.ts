@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { MockProductApiClientService } from '../../shared/services/mock-product-api-client.service';
+import { ProductService } from '../../shared/services/product-api-client.service';
+import { CategoryService } from '../../shared/services/category-api-client.service';
 import { Product } from '../../shared/models/product.model';
 import { FilterStateService } from '../../shared/services/filter-state.service';
 import { Category } from '../../shared/models/category.model';
-import { MockApiClientService } from '../../shared/services/mock-api-client.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
@@ -21,19 +22,19 @@ export class ProductListComponent implements OnInit {
   availableBrands: string[] = [];
 
   constructor(
-    private productApiClient: MockProductApiClientService,
-    private categoryApiClient: MockApiClientService,
+    private productService: ProductService,
+    private categoryService: CategoryService,
     private filterState: FilterStateService,
     private router: Router
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.products = await this.productApiClient.getProducts();
-    this.categoryApiClient.getCategories().subscribe((categories) => {
+    this.products = await firstValueFrom(this.productService.getProducts());
+    this.categoryService.getCategories().subscribe((categories) => {
       this.categories = categories;
       this.filteredProducts = [...this.products];
     });
-
+  
     this.filterState.filterState$.subscribe((filters) => {
       this.applyFilters(filters);
     });
@@ -60,6 +61,7 @@ export class ProductListComponent implements OnInit {
       return matchesCategory && matchesBrand && matchesModel && matchesColor && matchesPrice;
     });
   }
+
   onProductClick(product: Product): void {
     this.router.navigate(['/product', product.id]); // Переход на страницу товара
   }
