@@ -1,0 +1,12 @@
+<ng-container *ngIf="user$ | async as user">
+    <div class="user-dropdown">
+      <button class="dropdown-toggle" (click)="toggleDropdown()">{{ user }}</button>
+      <ul class="dropdown-menu" *ngIf="isDropdownOpen">
+        <li (click)="logout()">Выйти</li>
+      </ul>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!(user$ | async)">
+    <button class="header__button" [routerLink]="['/auth']">Войти</button>
+  </ng-container>
+  
