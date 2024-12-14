@@ -1,12 +1,13 @@
 <ng-container *ngIf="user$ | async as user">
-    <div class="user-dropdown">
-      <button class="dropdown-toggle" (click)="toggleDropdown()">{{ user }}</button>
-      <ul class="dropdown-menu" *ngIf="isDropdownOpen">
-        <li (click)="logout()">Выйти</li>
-      </ul>
-    </div>
-  </ng-container>
-  <ng-container *ngIf="!(user$ | async)">
-    <button class="header__button" [routerLink]="['/auth']">Войти</button>
-  </ng-container>
-  
+  <div class="user-dropdown">
+    <button mat-button [matMenuTriggerFor]="menu">{{ user }}</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="goOrderHistory()">История</button>
+      <button mat-menu-item (click)="logout()">Выйти</button>
+    </mat-menu>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!(user$ | async)">
+  <button mat-raised-button [routerLink]="['/auth']">Войти</button>
+</ng-container>

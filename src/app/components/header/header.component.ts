@@ -7,13 +7,15 @@ import { FilterStateService } from '../../shared/services/filter-state.service';
 import { AuthService } from '../../shared/services/auth.service';  // Импортируем AuthService
 import { MatDialog } from '@angular/material/dialog';  // Импортируем MatDialog
 import { AuthDialogComponent } from '../../auth-dialog/auth-dialog.component'; // Импортируем компонент диалога авторизации
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
 
 import { SearchComponent } from '../search/search.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, CategoriesDropdownComponent, SearchComponent, UserDropdownComponent],
+  imports: [CommonModule, CategoriesDropdownComponent, SearchComponent, UserDropdownComponent, MatToolbarModule, MatButtonModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })

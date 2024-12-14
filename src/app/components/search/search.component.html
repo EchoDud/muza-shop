@@ -1,20 +1,28 @@
 <div class="search">
-  <input
-    type="text"
-    [(ngModel)]="query"
-    (input)="onSearch()"
-    class="search__input"
-    placeholder="Поиск товаров..."
-  />
-  <div class="search__results" *ngIf="searchResults.length > 0">
-    <ul>
-      <li
-        *ngFor="let product of searchResults"
-        (click)="onProductClick(product.id)"
-      >
-        <img [src]="product.imageUrl" alt="{{ 'None' }}" class="result__image" />
+  <mat-form-field appearance="fill" class="search__input">
+    <mat-icon matPrefix>search</mat-icon>
+    <input
+      matInput
+      [(ngModel)]="query"
+      (ngModelChange)="onSearch()"
+      [matAutocomplete]="auto"
+      placeholder="Поиск товаров..."
+    />
+  </mat-form-field>
+
+  <mat-autocomplete #auto="matAutocomplete" class="search__results">
+    <mat-option
+      *ngFor="let product of searchResults"
+      (click)="onProductClick(product.id)"
+    >
+      <div class="result">
+        <img
+          [src]="product.imageUrl"
+          alt="{{ product.brand }}"
+          class="result__image"
+        />
         <span>{{ product.brand }} {{ product.model }} ({{ product.color }})</span>
-      </li>
-    </ul>
-  </div>
+      </div>
+    </mat-option>
+  </mat-autocomplete>
 </div>

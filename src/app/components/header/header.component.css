@@ -1,61 +1,21 @@
 .header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  background-color: #f8f9fa;
-  padding: 1rem 2rem;
-  border-bottom: 1px solid #ccc;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  align-items: center;
 }
 
 .header__logo {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #333;
-  margin-right: 2rem; /* Отступ справа от логотипа */
+  cursor: pointer;
 }
 
 .header__search {
-  display: flex;
-  align-items: center;
-  flex-grow: 1; /* Расширяем поле поиска */
-  margin-right: 2rem; /* Отступ справа от поиска */
-}
-
-.search__input {
-  width: 100%; /* Поле ввода занимает всё доступное пространство */
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
+  flex-grow: 1;
+  margin: 0 1rem;
 }
 
 .header__buttons {
   display: flex;
   gap: 1rem;
 }
-
-.header__button {
-  padding: 0.5rem 1rem;
-  background-color: #ff8c00;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;  
-}
-
-
-.header__button:hover {
-  background-color: #e67600;
-}
-
-app-categories-dropdown {
-  margin-right: auto; /* Двигает дропдаун влево, позволяя остальным элементам занять доступное пространство */
-}
-
-app-search{
-  margin-right: auto;
-  width: 75%;
-}
-

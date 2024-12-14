@@ -1,15 +1,17 @@
-<header class="header">
-  <div class="header__logo" (click)="goToHomePage()">Муза</div>
-    <app-categories-dropdown></app-categories-dropdown>
+<mat-toolbar color="primary" class="header">
+  <span class="header__logo" (click)="goToHomePage()">Муза</span>
 
-    <!-- Поле поиска -->
-    <app-search></app-search>
+  <!-- Dropdown категорий -->
+  <app-categories-dropdown></app-categories-dropdown>
+
+  <!-- Поле поиска -->
+  <app-search class="header__search"></app-search>
 
   <!-- Кнопки -->
   <div class="header__buttons">
-    <button class="header__button" (click)="goToCart()">Корзина 🛒</button>
+    <button mat-raised-button color="accent" (click)="goToCart()">
+      Корзина 🛒
+    </button>
     <app-user-dropdown></app-user-dropdown>
   </div>
-  
-  </header>
-  
+</mat-toolbar>
