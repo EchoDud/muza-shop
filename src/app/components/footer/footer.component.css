@@ -1,4 +1,19 @@
+/* Обеспечиваем, что футер всегда будет внизу страницы */
 .layout__footer {
-  text-align: center;
-  padding: 1rem;
+  display: flex;
+  justify-content: center;  /* Центрируем текст по горизонтали */
+  align-items: center;      /* Центрируем текст по вертикали */
+  height: fit-content;            /* Задаем высоту футера */
+  text-align: center;       /* Центрируем текст */
+  padding: 1rem;            /* Отступы внутри футера */
+  margin-top: auto;         /* Если контента мало, футер будет прижат к низу */
+}
+
+html, body {
+  height: 100%;  /* Обеспечиваем, что контейнер растягивается на всю высоту */
+  margin: 0;
+}
+
+mat-toolbar {
+  flex-shrink: 0;  /* Убираем возможное сжатие футера */
 }
