@@ -3,14 +3,13 @@ import { Router } from '@angular/router';
 import { CartService } from '../../../shared/services/cart.service';
 import { CartItem } from '../../../shared/models/cart-item.model';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from '../../header/header.component';
 
 @Component({
   selector: 'app-cart-page',
   standalone: true,
   templateUrl: './cart-page.component.html',
   styleUrls: ['./cart-page.component.css'],
-  imports: [CommonModule, HeaderComponent],
+  imports: [CommonModule],
 })
 export class CartPageComponent implements OnInit {
   cartItems: CartItem[] = [];

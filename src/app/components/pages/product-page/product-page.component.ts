@@ -7,14 +7,13 @@ import { CategoryService } from '../../../shared/services/category-api-client.se
 import { Category } from '../../../shared/models/category.model';
 import { firstValueFrom } from 'rxjs';
 import { CartService } from '../../../shared/services/cart.service';
-import { HeaderComponent } from '../../header/header.component';
 
 @Component({
   selector: 'app-product-page',
   templateUrl: './product-page.component.html',
   styleUrls: ['./product-page.component.css'],
   standalone: true,
-  imports: [CommonModule,HeaderComponent],
+  imports: [CommonModule],
 })
 export class ProductPageComponent implements OnInit {
   product: Product | null = null;

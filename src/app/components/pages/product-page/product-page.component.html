@@ -1,5 +1,4 @@
-<div class="layout">
-  <app-header></app-header>
+
   <div *ngIf="product" class="product-page">
     <h1>{{ product.brand }} {{ product.model }}</h1>
     <img [src]="product.imageUrl" alt="{{ 'Нет изображения' }}" class="product-image" />
@@ -12,4 +11,3 @@
   <div *ngIf="!product" class="loading">
     Загрузка товара...
   </div>
-</div>

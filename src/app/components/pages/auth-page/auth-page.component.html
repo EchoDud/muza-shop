@@ -1,5 +1,3 @@
-<div class="layout">
-  <app-header></app-header>
   <div class="auth-container">
       <h2>{{ isRegisterMode ? 'Регистрация' : 'Вход' }}</h2>
       <form [formGroup]="authForm" (ngSubmit)="submit()">
