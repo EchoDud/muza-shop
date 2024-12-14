@@ -6,13 +6,15 @@ import { Product } from '../../../shared/models/product.model';
 import { CategoryService } from '../../../shared/services/category-api-client.service';
 import { Category } from '../../../shared/models/category.model';
 import { firstValueFrom } from 'rxjs';
+import { CartService } from '../../../shared/services/cart.service';
+import { HeaderComponent } from '../../header/header.component';
 
 @Component({
   selector: 'app-product-page',
   templateUrl: './product-page.component.html',
   styleUrls: ['./product-page.component.css'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,HeaderComponent],
 })
 export class ProductPageComponent implements OnInit {
   product: Product | null = null;
@@ -22,7 +24,8 @@ export class ProductPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private cartService: CartService // Добавлен сервис корзины
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -37,6 +40,15 @@ export class ProductPageComponent implements OnInit {
       if (this.product) {
         this.categoryName = this.categoryMap.get(this.product.categoryId) || 'Неизвестная категория';
       }
+    }
+  }
+
+  addToCart() {
+    if (this.product) {
+      this.cartService.incrementItem(this.product.id).subscribe({
+        next: () => alert('Товар добавлен в корзину!'),
+        error: (err) => console.error('Ошибка добавления товара в корзину:', err),
+      });
     }
   }
 }
