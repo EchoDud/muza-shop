@@ -4,17 +4,18 @@ import { CategoryService } from '../../shared/services/category-api-client.servi
 import { Category } from '../../shared/models/category.model';
 import { CategoryItemComponent } from './category-item/category-item.component';
 import { FilterStateService } from '../../shared/services/filter-state.service';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-categories-dropdown',
   standalone: true,
-  imports: [CategoryItemComponent, CommonModule],
+  imports: [CommonModule, MatMenuModule, CategoryItemComponent, MatButtonModule],
   templateUrl: './categories-dropdown.component.html',
   styleUrls: ['./categories-dropdown.component.css'],
 })
 export class CategoriesDropdownComponent implements OnInit {
   categories: Category[] = [];
-  isDropdownOpen = false;
 
   constructor(
     private categoryService: CategoryService,
@@ -22,40 +23,34 @@ export class CategoriesDropdownComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Загрузка всех категорий через реальный API
+    // Загрузка всех категорий через API
     this.categoryService.getCategories().subscribe((data) => {
       this.categories = data;
     });
-  }
-
-  toggleDropdown(): void {
-    this.isDropdownOpen = !this.isDropdownOpen;
   }
 
   getRootCategories(): Category[] {
     return this.categories.filter((cat) => cat.parentId === null);
   }
 
-  onCategorySelect(categoryId: number): void {
-    // Получаем дочерние категории с сервера
-    this.categoryService.getChildCategories(categoryId).subscribe((children) => {
-      const childCategoryIds = children.map((cat) => cat.id);
+  getChildren(categoryId: number): Category[] {
+    return this.categories.filter((cat) => cat.parentId === categoryId);
+  }
 
-      // Находим все выбранные категории
+  onCategorySelect(categoryId: number): void {
+    this.categoryService.getChildCategories(categoryId).subscribe((children) => {
       const selectedCategories = [
         categoryId,
-        ...childCategoryIds,
+        ...children.map((cat) => cat.id),
       ]
         .map((id) => this.categories.find((cat) => cat.id === id)?.name)
         .filter((name) => name) as string[];
 
-      // Обновляем категории в состоянии фильтра
       this.filterState.updateCategoryFilters(selectedCategories);
-
-      // Закрываем дропдаун
-      this.isDropdownOpen = false;
-
       console.log('Selected categories:', selectedCategories);
     });
   }
 }
+
+
+

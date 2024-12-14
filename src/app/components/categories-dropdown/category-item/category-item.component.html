@@ -1,5 +1,8 @@
 <div class="category-item">
-  <button (click)="onSelect()">{{ category.name }}</button>
+  <button mat-raised-button color="primary" (click)="onSelect()">
+    <mat-icon>folder</mat-icon>
+    {{ category.name }}
+  </button>
   <div class="category-children" *ngIf="children.length > 0">
     <ng-container *ngFor="let child of children">
       <app-category-item

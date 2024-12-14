@@ -1,44 +1,51 @@
-.category-item {    
-    word-wrap: break-word;
-    max-width: fit-content;
-    width: 40vw;
-    
-  }
-  
-  .category-item > button {
-    display: block;
-    width: 100%;
-    text-align: left; /* Выровнять текст кнопки влево */
-    padding: 8px;
-    border: none;
-    background: none;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .category-item > button:hover {
-    background-color: #f0f0f0; /* Легкий серый фон при наведении */
-  }
-  
-  .category-children {
-    margin-top: 5px;
-    margin-left: 15px; /* Дополнительный отступ для дочерних элементов */
-    border-left: 2px solid #ccc; /* Линия для обозначения вложенности */
-    padding-left: 10px;
-  }
-  
-  .category-children > .category-item:first-child {
-    margin-top: 10px; /* Отступ для первого дочернего элемента */
-  }
+.category-item {
+  word-wrap: break-word;
+  max-width: 100%;
+  width: 100%;
+  padding: 8px 0;
+}
 
-  .category-item > button::before {
-    content: '▶';
-    display: inline-block;
-    margin-right: 8px;
-    transform: rotate(90deg); /* Повернуть стрелку, если нужно */
-    transition: transform 0.3s ease;
-  }
-  
-  .category-item > button:hover::before {
-    transform: rotate(0deg);
-  }
+.category-item > button {
+  display: flex;                  /* Используем flexbox для вертикального выравнивания */
+  align-items: center;            /* Центрируем контент по вертикали */
+  justify-content: flex-start;    /* Выровнять текст и иконку по левому краю */
+  width: 100%;
+  text-align: left; 
+  padding: 12px 16px;             /* Немного увеличили отступы */
+  font-size: 16px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  color: #333;
+  border: 1px solid #ccc;
+  transition: background-color 0.3s, box-shadow 0.3s ease;
+}
+
+/* Стиль при наведении на кнопку */
+.category-item > button:hover {
+  background-color: #f5f5f5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Дочерние категории */
+.category-children {
+  margin-top: 5px;
+  margin-left: 15px; /* Дополнительный отступ для дочерних элементов */
+  padding-left: 10px;
+  border-left: 2px solid #ccc; /* Линия для обозначения вложенности */
+}
+
+/* Стиль для первого дочернего элемента */
+.category-children > .category-item:first-child {
+  margin-top: 10px; /* Отступ для первого дочернего элемента */
+}
+
+/* Иконка кнопки */
+.category-item > button mat-icon {
+  margin-right: 8px; /* Отступ справа от иконки */
+}
+
+/* Подсветка при наведении на дочерний элемент */
+.category-item > button:hover mat-icon {
+  color: #3f51b5;
+}
+

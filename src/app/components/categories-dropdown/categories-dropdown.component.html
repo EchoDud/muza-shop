@@ -1,6 +1,7 @@
 <div class="dropdown">
-  <button (click)="toggleDropdown()" class="dropdown__button">Категории</button>
-  <div class="dropdown__menu" [class.dropdown__menu--open]="isDropdownOpen">
+  <button mat-button [matMenuTriggerFor]="menu" class="dropdown__button">Категории</button>
+
+  <mat-menu #menu="matMenu">
     <ng-container *ngFor="let parent of getRootCategories()">
       <app-category-item
         [category]="parent"
@@ -8,5 +9,5 @@
         (categorySelected)="onCategorySelect($event)">
       </app-category-item>
     </ng-container>
-  </div>
+  </mat-menu>
 </div>

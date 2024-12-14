@@ -1,13 +1,15 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Category } from '../../../shared/models/category.model'; 
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-category-item',
   templateUrl: './category-item.component.html',
   styleUrls: ['./category-item.component.css'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatButtonModule, MatIconModule],
 })
 export class CategoryItemComponent {
   @Input() category!: Category;
