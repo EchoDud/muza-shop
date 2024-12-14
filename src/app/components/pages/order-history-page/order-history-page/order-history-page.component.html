@@ -1,16 +1,18 @@
-<div *ngIf="orders.length > 0; else noOrders">
-    <h2>История заказов</h2>
-    <ul>
-      <li *ngFor="let order of orders">
-        <div>
-          <strong>{{ order.name }}</strong> - {{ order.quantity }} x {{ order.price | currency }}
-        </div>
-        <div>Status: {{ order.status }}</div>
-        <div>Дата заказа: {{ order.createdDate | date }}</div>
-      </li>
-    </ul>
-  </div>
-  <ng-template #noOrders>
-    <p>Нет оплаченных или завершенных заказов.</p>
-  </ng-template>
+<div class="layout">
+    <app-header></app-header>
+    <div *ngIf="orders.length > 0; else noOrders">
+        <h2>История заказов</h2>
+        <ul>
+        <li *ngFor="let order of orders">
+            <div>
+            <strong>{{ order.name }}</strong> - {{ order.quantity }} x {{ order.price | currency }}
+            </div>
+            <div>Status: {{ order.status }}</div>
+            <div>Дата заказа: {{ order.createdDate | date }}</div>
+        </li>
+        </ul>
+    </div>
+    <ng-template #noOrders>
+        <p>Нет оплаченных или завершенных заказов.</p>
+    </ng-template>
   

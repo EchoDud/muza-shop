@@ -1,30 +1,32 @@
-<div class="cart-container">
-  <h2>Ваша корзина</h2>
+<div class="layout">
+  <app-header></app-header>
+  <div class="cart-container">
+      <h2>Ваша корзина</h2>
 
-  <div *ngIf="cartItems.length > 0; else emptyCart">
-    <div *ngFor="let item of cartItems" class="cart-item">
-      <div class="item-info">
-        <p><strong>{{ item.name }}</strong></p>
-        <p>Цена: {{ item.price }} ₽</p>
-        <p>Количество: {{ item.quantity }}</p>
+      <div *ngIf="cartItems.length > 0; else emptyCart">
+        <div *ngFor="let item of cartItems" class="cart-item">
+          <div class="item-info">
+            <p><strong>{{ item.name }}</strong></p>
+            <p>Цена: {{ item.price }} ₽</p>
+            <p>Количество: {{ item.quantity }}</p>
+          </div>
+          <div class="item-actions">
+            <button (click)="incrementItem(item.productId)">➕</button>
+            <button (click)="decrementItem(item.productId)">➖</button>
+            <button (click)="removeItem(item.productId)">❌ Удалить</button>
+          </div>
+        </div>
+
+        <div class="cart-summary">
+          <p><strong>Общая сумма:</strong> {{ totalPrice }} ₽</p>
+        </div>
+
+        <button (click)="checkout()">Оплатить</button>
       </div>
-      <div class="item-actions">
-        <button (click)="incrementItem(item.productId)">➕</button>
-        <button (click)="decrementItem(item.productId)">➖</button>
-        <button (click)="removeItem(item.productId)">❌ Удалить</button>
-      </div>
-    </div>
 
-    <div class="cart-summary">
-      <p><strong>Общая сумма:</strong> {{ totalPrice }} ₽</p>
-    </div>
+      <ng-template #emptyCart>
+        <p>Корзина пуста.</p>
+      </ng-template>
 
-    <button (click)="checkout()">Оплатить</button>
+      <button (click)="goToHome()">Вернуться на главную</button>
   </div>
-
-  <ng-template #emptyCart>
-    <p>Корзина пуста.</p>
-  </ng-template>
-
-  <button (click)="goToHome()">Вернуться на главную</button>
-</div>

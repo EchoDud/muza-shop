@@ -3,13 +3,14 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators,ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../../shared/services/auth.service';
+import { HeaderComponent } from '../../header/header.component';
 
 @Component({
   selector: 'app-auth-page',
   standalone: true,
   templateUrl: './auth-page.component.html',
   styleUrls: ['./auth-page.component.css'], 
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, HeaderComponent],
 })
 export class AuthPageComponent {
   authForm: FormGroup;
