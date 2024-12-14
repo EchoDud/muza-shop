@@ -1,24 +1,42 @@
 <div *ngIf="product" class="product-page">
   <h1>{{ product.brand }} {{ product.model }}</h1>
-  <img [src]="product.imageUrl" alt="{{ 'Нет изображения' }}" class="product-image" />
-  <p><strong>Категория:</strong> {{ categoryName }}</p>
-  <p><strong>Цвет:</strong> {{ product.color }}</p>
-  <p><strong>Описание:</strong> {{ product.description }}</p>
-  <p><strong>Цена:</strong> {{ product.price | currency: 'RUB' }}</p>
 
-  <!-- Если товар в корзине, показываем кнопки изменения количества -->
-  <div *ngIf="cartItemQuantity > 0; else addToCartBlock">
-    <p><strong>В корзине:</strong> {{ cartItemQuantity }} шт.</p>
-    <button class="quantity-button" (click)="decrementQuantity()" [disabled]="cartItemQuantity <= 1">-</button>
-    <button class="quantity-button" (click)="incrementQuantity()">+</button>
-    <button class="remove-button" (click)="removeFromCart()">Убрать из корзины</button>
+  <div class="product-card-container">
+    <!-- Карточка с изображением -->
+    <div class="product-image-container">
+      <div *ngIf="product.imageUrl; else noImage">
+        <img [src]="product.imageUrl" alt="{{ product.model }}" class="product-image" />
+      </div>
+
+      <ng-template #noImage>
+        <div class="no-image">
+          <p>Нет изображения</p>
+        </div>
+      </ng-template>
+    </div>
+
+    <!-- Блок с текстом и кнопками -->
+    <div class="product-details">
+      <p><strong>Категория:</strong> {{ categoryName }}</p>
+      <p><strong>Цвет:</strong> {{ product.color }}</p>
+      <p><strong>Описание:</strong> {{ product.description }}</p>
+      <p><strong>Цена:</strong> {{ product.price | currency: 'RUB' }}</p>
+
+      <!-- Если товар в корзине, показываем кнопки изменения количества -->
+      <div *ngIf="cartItemQuantity > 0; else addToCartBlock">
+        <p><strong>В корзине:</strong> {{ cartItemQuantity }} шт.</p>
+        <button mat-raised-button color="primary" (click)="decrementQuantity()" [disabled]="cartItemQuantity <= 1">-</button>
+        <button mat-raised-button color="primary" (click)="incrementQuantity()">+</button>
+        <button mat-raised-button color="warn" (click)="removeFromCart()">Убрать из корзины</button>
+      </div>
+
+      <ng-template #addToCartBlock>
+        <button mat-raised-button color="accent" (click)="addToCart()" class="buy-button">Купить</button>
+      </ng-template>
+    </div>
   </div>
-
-  <ng-template #addToCartBlock>
-    <button class="buy-button" (click)="addToCart()">Купить</button>
-  </ng-template>
 </div>
 
 <div *ngIf="!product" class="loading">
-  Загрузка товара...
+  <mat-spinner diameter="30"></mat-spinner> Загрузка товара...
 </div>

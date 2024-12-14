@@ -1,40 +1,93 @@
 .product-page {
-    padding: 20px;
-    background: white;
-    margin: 0 auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .product-image {
-    width: 200px; /* Картинка растягивается по ширине карточки */
-    height: 200px; /* Фиксированная высота для унификации */
-    display: flex;
-    justify-content: center;
+  padding: 20px;
+}
+
+.product-card-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.product-image-container {
+  flex-shrink: 0; /* Не даем изображению уменьшаться */
+  width: auto; /* Ширина изображения */
+}
+
+.product-image {
+  width: 100%;
+  height: auto;
+  max-width: 300px; /* Максимальная ширина изображения */
+}
+
+.no-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  color: #666;
+  font-size: 16px;
+  text-align: center;
+}
+
+.product-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 15px;
+}
+
+.product-details p {
+  margin: 0;
+}
+
+/* Кнопки */
+.product-details button {
+  margin: 5px 5px; /* Добавляем отступы сверху и снизу */
+  width: auto;  /* Убираем растяжение кнопки на весь экран по умолчанию */
+}
+
+.buy-button {
+  margin: 5px 5px;
+  width: auto; 
+  max-width: fit-content;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .product-card-container {
+    flex-direction: column;
     align-items: center;
-    background-color: #f8f9fa;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
   }
-  
-  .buy-button {
-    margin-top: 10px;
-    padding: 10px 15px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+
+  .product-image-container {
+    width: 100%;
+    max-width: 400px; /* Изображение будет с максимальной шириной */
   }
-  
-  .buy-button:hover {
-    background-color: #218838;
-  }
-  
-  .loading {
+
+  .product-details {
+    width: 100%;
     text-align: center;
-    font-size: 18px;
-    color: #888;
   }
-  
+
+  /* Для мобильных кнопки будут растягиваться на всю ширину */
+  .product-details button {
+    width: 100%;  /* Растягиваем кнопки на всю ширину */
+    margin-top: 10px;
+  }
+
+  /* Для кнопки "Купить" тоже растягиваем на всю ширину */
+  .buy-button {
+    width: 100%;  /* Растягиваем кнопку "Купить" */
+    max-width: none;
+  }
+}

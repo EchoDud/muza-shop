@@ -31,15 +31,7 @@ export class HeaderComponent {
     } else {
       this.openAuthDialog();  // Если не авторизован, открываем диалог авторизации
     }
-  }
-
-  goToBuy() {
-    if (this.authService.isAuthenticated()) {
-      this.router.navigate(['/buy']);  // Если авторизован, переходим на страницу покупки
-    } else {
-      this.openAuthDialog();  // Если не авторизован, открываем диалог авторизации
-    }
-  }
+  }  
 
   goToHomePage() {
     // Сбрасываем фильтры
