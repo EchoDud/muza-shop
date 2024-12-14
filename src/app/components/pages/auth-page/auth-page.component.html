@@ -1,17 +1,32 @@
-  <div class="auth-container">
-      <h2>{{ isRegisterMode ? 'Регистрация' : 'Вход' }}</h2>
-      <form [formGroup]="authForm" (ngSubmit)="submit()">
-        <label>
-          Email:
-          <input type="email" formControlName="email" />
-        </label>
-        <label>
-          Password:
-          <input type="password" formControlName="password" />
-        </label>
-        <button type="submit">{{ isRegisterMode ? 'Зарегистрироваться' : 'Войти' }}</button>
-      </form>
-      <div *ngIf="message" class="auth-message">{{ message }}</div>
-      <button (click)="toggleMode()">Переключиться на {{ isRegisterMode ? 'вход' : 'регистрацию' }}</button>
-      <button class="back-button" (click)="goToHome()">Вернуться на главную</button>
+<div class="auth-container">
+  <h2>{{ isRegisterMode ? 'Регистрация' : 'Вход' }}</h2>
+  
+  <!-- Форма авторизации или регистрации -->
+  <form [formGroup]="authForm" (ngSubmit)="submit()" novalidate>
+    <div>
+      <label for="email">Email:</label>
+      <input id="email" type="email" formControlName="email" />
+      <div *ngIf="authForm.get('email')?.touched && authForm.get('email')?.invalid" class="error-message">
+        <div *ngIf="authForm.get('email')?.errors?.['required']">Email обязателен</div>
+        <div *ngIf="authForm.get('email')?.errors?.['email']">Введите корректный email</div>
+      </div>
     </div>
+
+    <div>
+      <label for="password">Пароль:</label>
+      <input id="password" type="password" formControlName="password" />
+      <div *ngIf="authForm.get('password')?.touched && authForm.get('password')?.invalid" class="error-message">
+        <div *ngIf="authForm.get('password')?.errors?.['required']">Пароль обязателен</div>
+        <div *ngIf="authForm.get('password')?.errors?.['minlength']">Пароль должен содержать хотя бы 6 символов</div>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="authForm.invalid">{{ isRegisterMode ? 'Зарегистрироваться' : 'Войти' }}</button>
+  </form>
+
+  <!-- Сообщения об ошибке или успехе -->
+  <div *ngIf="message" class="auth-message">{{ message }}</div>
+
+  <button (click)="toggleMode()">Переключиться на {{ isRegisterMode ? 'вход' : 'регистрацию' }}</button>
+  <button class="back-button" (click)="goToHome()">Вернуться на главную</button>
+</div>

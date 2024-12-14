@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators,ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
@@ -21,20 +21,29 @@ export class AuthPageComponent {
     private authService: AuthService,
     private router: Router
   ) {
+    // Создаем форму с валидацией
     this.authForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
+  // Переключение между режимами (вход и регистрация)
   toggleMode() {
     this.isRegisterMode = !this.isRegisterMode;
     this.message = ''; // Очистим сообщение при переключении режима
   }
 
+  // Отправка формы
   submit() {
+    if (this.authForm.invalid) {
+      return; // Если форма невалидна, не отправляем запрос
+    }
+
     const { email, password } = this.authForm.value;
+
     if (this.isRegisterMode) {
+      // Регистрация
       this.authService.register(email, password).subscribe({
         next: () => {
           this.message = 'Регистрация успешна. Теперь войдите.';
@@ -45,6 +54,7 @@ export class AuthPageComponent {
         },
       });
     } else {
+      // Вход
       this.authService.login(email, password).subscribe({
         next: () => {
           this.message = '';
@@ -57,6 +67,7 @@ export class AuthPageComponent {
     }
   }
 
+  // Переход на главную
   goToHome() {
     this.router.navigate(['/']);
   }

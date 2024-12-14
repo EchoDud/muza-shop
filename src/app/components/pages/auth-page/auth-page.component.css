@@ -29,4 +29,19 @@
   .auth-message.error {
     background-color: #dc3545;
   }
+  .error-message {
+    color: red;
+    font-size: 12px;
+  }
+  
+  .auth-message {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  button[disabled] {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
   

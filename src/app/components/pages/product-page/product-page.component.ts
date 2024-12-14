@@ -19,6 +19,7 @@ export class ProductPageComponent implements OnInit {
   product: Product | null = null;
   categoryName: string = ''; // Название категории
   private categoryMap: Map<number, string> = new Map();
+  cartItemQuantity: number = 0; // Количество товара в корзине
 
   constructor(
     private route: ActivatedRoute,
@@ -38,15 +39,67 @@ export class ProductPageComponent implements OnInit {
       this.product = await firstValueFrom(this.productService.getProductById(+id));
       if (this.product) {
         this.categoryName = this.categoryMap.get(this.product.categoryId) || 'Неизвестная категория';
+        this.checkIfInCart(this.product.id); // Проверка, есть ли товар в корзине
       }
     }
   }
 
+  // Проверка, добавлен ли товар в корзину
+  checkIfInCart(productId: number) {
+    this.cartService.getCartItems().subscribe((cartItems) => {
+      const cartItem = cartItems.find(item => item.productId === productId);
+      if (cartItem) {
+        this.cartItemQuantity = cartItem.quantity; // Устанавливаем количество товара в корзине
+      }
+    });
+  }
+
+  // Увеличение количества товара в корзине
+  incrementQuantity() {
+    if (this.product) {
+      this.cartService.incrementItem(this.product.id).subscribe({
+        next: () => {
+          this.cartItemQuantity++;
+        },
+        error: (err) => console.error('Ошибка увеличения товара в корзине:', err),
+      });
+    }
+  }
+
+  // Уменьшение количества товара в корзине
+  decrementQuantity() {
+    if (this.product && this.cartItemQuantity > 1) {
+      this.cartService.decrementItem(this.product.id).subscribe({
+        next: () => {
+          this.cartItemQuantity--;
+        },
+        error: (err) => console.error('Ошибка уменьшения товара в корзине:', err),
+      });
+    }
+  }
+
+  // Добавление товара в корзину
   addToCart() {
     if (this.product) {
       this.cartService.incrementItem(this.product.id).subscribe({
-        next: () => alert('Товар добавлен в корзину!'),
+        next: () => {
+          this.cartItemQuantity = 1; // Устанавливаем количество товара в корзине на 1
+          alert('Товар добавлен в корзину!');
+        },
         error: (err) => console.error('Ошибка добавления товара в корзину:', err),
+      });
+    }
+  }
+
+  // Удаление товара из корзины
+  removeFromCart() {
+    if (this.product) {
+      this.cartService.removeItem(this.product.id).subscribe({
+        next: () => {
+          this.cartItemQuantity = 0; // Устанавливаем количество товара в корзине на 0
+          alert('Товар удален из корзины!');
+        },
+        error: (err) => console.error('Ошибка удаления товара из корзины:', err),
       });
     }
   }
