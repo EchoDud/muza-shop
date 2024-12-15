@@ -1,0 +1,65 @@
+<div class="container">
+    <mat-card>
+      <mat-card-title>Управление пользователями</mat-card-title>
+      <mat-card-content>
+        <mat-table [dataSource]="users" class="mat-elevation-z8" *ngIf="users.length > 0">
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{ user.id }} </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{ user.email }} </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="role">
+            <mat-header-cell *matHeaderCellDef> Роль </mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{ user.role }} </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef> Действия </mat-header-cell>
+            <mat-cell *matCellDef="let user">
+              <button mat-raised-button color="warn" (click)="deleteUser(user.id)">Удалить</button>
+            </mat-cell>
+          </ng-container>
+  
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+  
+        <p *ngIf="users.length === 0">Нет данных для отображения</p>
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-card>
+      <mat-card-title>Добавить пользователя</mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="userForm" (ngSubmit)="addUser()">
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" required />
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill">
+            <mat-label>Пароль</mat-label>
+            <input matInput type="password" formControlName="password" required />
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill">
+            <mat-label>Роль</mat-label>
+            <mat-select formControlName="role">
+              <mat-option value="Client">Клиент</mat-option>
+              <mat-option value="Admin">Админ</mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid">
+            Добавить
+          </button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
