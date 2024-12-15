@@ -1,16 +1,20 @@
 <ng-container *ngIf="user$ | async as user">
-  <div class="user-dropdown">
-    <button mat-button [matMenuTriggerFor]="menu">{{ user.email }}</button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="goOrderHistory()">История</button>
-      <ng-container *ngIf="isAdmin(user)">
-        <button mat-menu-item (click)="goAdminPanel()">Админ панель</button>
-      </ng-container>
-      <button mat-menu-item (click)="logout()">Выйти</button>
-   </mat-menu>
+  <!-- Если пользователь авторизован, показываем его меню -->
+  <div *ngIf="user.email; else loginButton">
+    <div class="user-dropdown">
+      <button mat-button [matMenuTriggerFor]="menu">{{ user.email }}</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="goOrderHistory()">История</button>
+        <ng-container *ngIf="isAdmin(user)">
+          <button mat-menu-item (click)="goAdminPanel()">Админ панель</button>
+        </ng-container>
+        <button mat-menu-item (click)="logout()">Выйти</button>
+      </mat-menu>
+    </div>
   </div>
 </ng-container>
 
-<ng-container *ngIf="!(user$ | async)">
+<!-- Если пользователя нет, показываем кнопку "Войти" -->
+<ng-template #loginButton>
   <button mat-raised-button [routerLink]="['/auth']">Войти</button>
-</ng-container>
+</ng-template>

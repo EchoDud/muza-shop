@@ -18,8 +18,8 @@
     <mat-card-content class="product-info">
       <h3>{{ product.brand }} {{ product.model }}</h3>
       <p>Цвет: {{ product.color }}</p>
-      <p>{{ product.description }}</p>
-      <p class="price">{{ product.price | currency: 'RUB' }}</p>
+      <p class="description" [title]="product.description">{{ product.description }}</p>
+      <p class="price">{{ product.price | currency: 'RUB ' }}</p>
     </mat-card-content>
 
     <mat-card-actions class="product-actions">

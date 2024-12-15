@@ -12,6 +12,8 @@ import { firstValueFrom } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar'; // Импортируем MatSnackBar
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthDialogComponent } from '../../auth-dialog/auth-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-product-list',
@@ -32,6 +34,7 @@ export class ProductListComponent implements OnInit {
     private categoryService: CategoryService,
     private filterState: FilterStateService,
     private router: Router,
+    private dialog: MatDialog,
     private cartService: CartService,  // Добавляем CartService
     private authService: AuthService,  // Добавляем AuthService
     private snackBar: MatSnackBar    // Добавляем MatSnackBar для уведомлений
@@ -101,10 +104,17 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-  openAuthDialog(): void {
-    // Логика открытия диалога для авторизации
-    console.log('Открыть диалог для авторизации');
-  }
+  private openAuthDialog() {
+      const dialogRef = this.dialog.open(AuthDialogComponent, {
+        width: '400px',
+      });
+  
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result === 'auth') {
+          this.router.navigate(['/auth']);  // Переход на страницу логина
+        }
+      });
+    }
 
   // Увеличение количества товара в корзине
   incrementQuantity(productId: number) {

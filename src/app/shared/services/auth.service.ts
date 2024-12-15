@@ -65,7 +65,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem(this.tokenKey);
-    this.userSubject.next({ email: null, role: null });
+    this.userSubject.next({ email: null, role: null }); // Сбрасываем данные пользователя
   }
 
   isAuthenticated(): boolean {
