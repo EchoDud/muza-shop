@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from '../models/product.model';
 
@@ -8,8 +8,18 @@ import { Product } from '../models/product.model';
 })
 export class ProductService {
   private readonly apiUrl = 'http://localhost:5000/api/product';
+  private readonly tokenKey = 'auth_token';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    const token = localStorage.getItem(this.tokenKey);
+  }
+
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem(this.tokenKey);
+    return new HttpHeaders({
+      Authorization: token ? `Bearer ${token}` : '',
+    });
+  }
 
   // Получение всех продуктов
   getProducts(): Observable<Product[]> {
@@ -25,4 +35,21 @@ export class ProductService {
   getProductsByCategory(categoryId: number): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.apiUrl}/category/${categoryId}`);
   }
+
+  // Добавление нового продукта
+  addProduct(product: Product): Observable<Product> {
+    return this.http.post<Product>(`${this.apiUrl}/add`, product, {
+      headers: this.getAuthHeaders(),
+    });
+  }
+
+  // Удаление продукта по ID
+  deleteProduct(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/delete/${id}`, {
+      headers: this.getAuthHeaders(),
+    });
+  }
+
 }
+
+

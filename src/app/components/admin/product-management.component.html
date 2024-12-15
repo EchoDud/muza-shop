@@ -1,0 +1,110 @@
+<!-- product-management.component.html -->
+<mat-card>
+  <mat-card-title>Список продуктов</mat-card-title>
+  <mat-card-content>
+    <table mat-table [dataSource]="products">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let product"> {{ product.id }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="brand">
+        <th mat-header-cell *matHeaderCellDef> Бренд </th>
+        <td mat-cell *matCellDef="let product"> {{ product.brand }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="categoryId">
+        <th mat-header-cell *matHeaderCellDef> Категория </th>
+        <td mat-cell *matCellDef="let product"> {{ product.categoryId }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="model">
+        <th mat-header-cell *matHeaderCellDef> Модель </th>
+        <td mat-cell *matCellDef="let product"> {{ product.model }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="color">
+        <th mat-header-cell *matHeaderCellDef> Цвет </th>
+        <td mat-cell *matCellDef="let product"> {{ product.color }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Описание </th>
+        <td mat-cell *matCellDef="let product"> {{ product.description }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Цена </th>
+        <td mat-cell *matCellDef="let product"> {{ product.price | currency }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="imageUrl">
+        <th mat-header-cell *matHeaderCellDef> Изображение </th>
+        <td mat-cell *matCellDef="let product">
+          <img [src]="product.imageUrl" alt="product image" width="50" />
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Действия </th>
+        <td mat-cell *matCellDef="let product">
+          <button mat-raised-button color="warn" (click)="deleteProduct(product.id)">Удалить</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-title>Добавить продукт</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="productForm" (ngSubmit)="addProduct()">
+      
+      <mat-form-field appearance="fill">
+        <mat-label>Бренд</mat-label>
+        <input matInput formControlName="brand" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Модель</mat-label>
+        <input matInput formControlName="model" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Цвет</mat-label>
+        <input matInput formControlName="color" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Описание</mat-label>
+        <textarea matInput formControlName="description" required></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Цена</mat-label>
+        <input matInput formControlName="price" type="number" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Ссылка на изображение</mat-label>
+        <input matInput formControlName="imageUrl" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Категория</mat-label>
+        <mat-select formControlName="categoryId" required>
+          <mat-option *ngFor="let category of categories" [value]="category.id" [disabled]="isCategoryDisabled(category.id)">
+            {{ category.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="productForm.invalid">
+        Добавить
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>
