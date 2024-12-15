@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { ProductService } from '../../shared/services/product-api-client.service';
-import { Product } from '../../shared/models/product.model';
-import { CategoryService } from '../../shared/services/category-api-client.service';
-import { Category } from '../../shared/models/category.model';
+import { ProductService } from '../../../shared/services/product-api-client.service';
+import { Product } from '../../../shared/models/product.model';
+import { CategoryService } from '../../../shared/services/category-api-client.service';
+import { Category } from '../../../shared/models/category.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
