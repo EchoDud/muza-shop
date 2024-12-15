@@ -32,7 +32,7 @@
 
     <ng-container matColumnDef="createdDate">
       <mat-header-cell *matHeaderCellDef> Дата заказа </mat-header-cell>
-      <mat-cell *matCellDef="let order"> {{ order.createdDate | date: 'short' }} </mat-cell>
+      <mat-cell *matCellDef="let order"> {{ order.createdDate | date: 'yyyy-MM-dd HH:mm:ss' }} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

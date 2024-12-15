@@ -8,7 +8,7 @@ import { BehaviorSubject, Observable, catchError, throwError, tap } from 'rxjs';
 export class AuthService {
   private readonly apiUrl = 'http://localhost:5000/api/auth';
   private tokenKey = 'auth_token';
-  private userSubject = new BehaviorSubject<string | null>(null);
+  private userSubject = new BehaviorSubject<{ email: string | null; role: string | null }>({ email: null, role: null });
 
   user$ = this.userSubject.asObservable();
 
@@ -23,14 +23,14 @@ export class AuthService {
     try {
       const payload = JSON.parse(atob(token.split('.')[1])); // Декодируем payload токена
       if (payload && payload.email && payload.role) {
-        this.userSubject.next(payload.email); // Можно хранить и роль, если нужно
+        this.userSubject.next({ email: payload.email, role: payload.role }); // Сохраняем и email, и роль
       } else {
         console.error('Invalid token payload');
-        this.userSubject.next(null);
+        this.userSubject.next({ email: null, role: null });
       }
     } catch (e) {
       console.error('Invalid token format', e);
-      this.userSubject.next(null);
+      this.userSubject.next({ email: null, role: null });
     }
   }
 
@@ -65,7 +65,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem(this.tokenKey);
-    this.userSubject.next(null);
+    this.userSubject.next({ email: null, role: null });
   }
 
   isAuthenticated(): boolean {

@@ -12,7 +12,7 @@ export const appRoutes: Routes = [
   { path: 'auth', component: AuthPageComponent },
   { path: 'cart', component: CartPageComponent },
   { path: 'order-history', component: OrderHistoryPageComponent },
-  {path: 'admin-panel', component: AdminPanelComponent},
+  { path: 'admin-panel', component: AdminPanelComponent},
   { path: '**', redirectTo: '', pathMatch: 'full' },
 
 ];

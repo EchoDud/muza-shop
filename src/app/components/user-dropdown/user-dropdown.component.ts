@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../shared/services/auth.service';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { Router } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -24,5 +24,13 @@ export class UserDropdownComponent {
 
   goOrderHistory() {
     this.router.navigate(['/order-history']);
+  }
+
+  goAdminPanel() {
+    this.router.navigate(['/admin-panel']);
+  }
+
+  isAdmin(user: { role: string | null }): boolean {
+    return user.role === 'Admin'; // Проверка роли пользователя
   }
 }
