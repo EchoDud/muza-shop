@@ -3,30 +3,31 @@
   
   <!-- Форма авторизации или регистрации -->
   <form [formGroup]="authForm" (ngSubmit)="submit()" novalidate>
-    <div>
-      <label for="email">Email:</label>
-      <input id="email" type="email" formControlName="email" />
-      <div *ngIf="authForm.get('email')?.touched && authForm.get('email')?.invalid" class="error-message">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput id="email" type="email" formControlName="email" />
+      <mat-error *ngIf="authForm.get('email')?.touched && authForm.get('email')?.invalid">
         <div *ngIf="authForm.get('email')?.errors?.['required']">Email обязателен</div>
         <div *ngIf="authForm.get('email')?.errors?.['email']">Введите корректный email</div>
-      </div>
-    </div>
+      </mat-error>
+    </mat-form-field>
 
-    <div>
-      <label for="password">Пароль:</label>
-      <input id="password" type="password" formControlName="password" />
-      <div *ngIf="authForm.get('password')?.touched && authForm.get('password')?.invalid" class="error-message">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Пароль</mat-label>
+      <input matInput id="password" type="password" formControlName="password" />
+      <mat-error *ngIf="authForm.get('password')?.touched && authForm.get('password')?.invalid">
         <div *ngIf="authForm.get('password')?.errors?.['required']">Пароль обязателен</div>
         <div *ngIf="authForm.get('password')?.errors?.['minlength']">Пароль должен содержать хотя бы 6 символов</div>
-      </div>
-    </div>
+      </mat-error>
+    </mat-form-field>
 
-    <button type="submit" [disabled]="authForm.invalid">{{ isRegisterMode ? 'Зарегистрироваться' : 'Войти' }}</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="authForm.invalid" class="full-width">
+      {{ isRegisterMode ? 'Зарегистрироваться' : 'Войти' }}
+    </button>
   </form>
 
-  <!-- Сообщения об ошибке или успехе -->
-  <div *ngIf="message" class="auth-message">{{ message }}</div>
-
-  <button (click)="toggleMode()">Переключиться на {{ isRegisterMode ? 'вход' : 'регистрацию' }}</button>
-  <button class="back-button" (click)="goToHome()">Вернуться на главную</button>
+  <!-- Кнопка для переключения между входом и регистрацией -->
+  <button mat-stroked-button (click)="toggleMode()" class="toggle-button">
+    Переключиться на {{ isRegisterMode ? 'вход' : 'регистрацию' }}
+  </button>
 </div>

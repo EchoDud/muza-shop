@@ -20,6 +20,7 @@ export class UserDropdownComponent {
 
   logout() {
     this.authService.logout();
+    this.router.navigate(['/']);
   }
 
   goOrderHistory() {

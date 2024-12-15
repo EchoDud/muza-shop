@@ -1,47 +1,35 @@
 .auth-container {
-    max-width: 400px;
-    margin: 2rem auto;
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-  
-  input {
-    width: 100%;
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  .auth-message {
-    margin: 1rem 0;
-    padding: 0.5rem;
-    color: white;
-    background-color: #007bff;
-    border-radius: 4px;
-  }
-  
-  .auth-message.error {
-    background-color: #dc3545;
-  }
-  .error-message {
-    color: red;
-    font-size: 12px;
-  }
-  
-  .auth-message {
-    margin-top: 10px;
-    font-weight: bold;
-  }
-  
-  button[disabled] {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+mat-form-field {
+  margin-bottom: 16px;
+}
+
+button {
+  margin-top: 20px;
+}
+
+.toggle-button {
+  margin-top: 10px;
+  display: block;
+  width: 100%;
+}
+
+mat-snack-bar-container {
+  margin-top: 20px;
+}
