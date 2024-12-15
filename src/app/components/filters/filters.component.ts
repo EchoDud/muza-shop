@@ -1,6 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { FilterStateService } from '../../shared/services/filter-state.service';
 
 @Component({
@@ -8,7 +13,15 @@ import { FilterStateService } from '../../shared/services/filter-state.service';
   templateUrl: './filters.component.html',
   styleUrls: ['./filters.component.css'],
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatIconModule,
+  ],
 })
 export class FiltersComponent {
   @Input() availableBrands: string[] = [];
@@ -56,6 +69,9 @@ export class FiltersComponent {
 
   toggleSelection(value: string, selectedList: string[]): void {
     if (value === 'all') {
+      if (selectedList.length === 1 && selectedList[0] === 'all') {
+        return; // Если "Все" уже выбрано, не изменяем
+      }
       selectedList.length = 0;
       selectedList.push('all');
     } else {
@@ -65,13 +81,10 @@ export class FiltersComponent {
       } else {
         selectedList.push(value);
       }
-      if (selectedList.length === 0) {
-        selectedList.push('all');
-      } else {
-        const allIndex = selectedList.indexOf('all');
-        if (allIndex > -1) {
-          selectedList.splice(allIndex, 1);
-        }
+      // Если "Все" был выбран и больше нет других элементов, убираем "Все"
+      const allIndex = selectedList.indexOf('all');
+      if (allIndex > -1 && selectedList.length > 1) {
+        selectedList.splice(allIndex, 1);
       }
     }
     this.updateDisplayedOptions();

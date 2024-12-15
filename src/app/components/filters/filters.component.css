@@ -1,93 +1,45 @@
-/* Общий стиль для блока фильтров */
 .filters {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
   background-color: #f9f9f9;
+  border-radius: 8px;
 }
 
-/* Список брендов */
-.brand-list {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  max-height: 150px; /* Максимальная высота списка */
-  overflow-y: auto; /* Скроллинг */
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #fff;
-}
-
-/* Элементы списка брендов */
-.brand-list li {
-  padding: 2px 5px; /* Минимальные отступы */
-  margin: 0;
-  display: flex;
-  justify-content: space-between; /* Текст слева, чекбокс справа */
-  align-items: center;
-  font-size: 14px; /* Размер шрифта */
-}
-
-.brand-list li:hover {
-  background-color: #f0f0f0;
-  cursor: pointer;
-}
-
-.brand-list label {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  align-items: center;
-  gap: 10px; /* Промежуток между текстом и чекбоксом */
-  margin: 0;
-}
-
-/* Убираем стандартные отступы для чекбоксов */
-.brand-list input[type='checkbox'] {
-  margin: 0;
-  transform: scale(1); /* Увеличить/уменьшить размер чекбокса, если требуется */
-}
-
-/* Стили для фильтров цены */
 .filter-group {
+  display: flex;
+  flex-direction: column;
+  max-height: 300px; /* Устанавливаем максимальную высоту для группы фильтров */
+  overflow-y: auto;  /* Добавляем прокрутку */
+}
+
+
+h3 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+h4 {
+  font-size: 18px;
   margin-bottom: 10px;
 }
 
-.filter-group label {
-  display: block;
-  margin-bottom: 5px;
+.mat-checkbox {
+  display: block;    /* Каждую опцию на новой строке */
+  margin-bottom: 8px; /* Добавляем отступы между чекбоксами */
 }
 
-.filter-group input {
+mat-form-field {
   width: 100%;
-  padding: 5px;
-  box-sizing: border-box;
 }
 
 .filter-actions {
   display: flex;
-  justify-content: space-between;
   gap: 10px;
 }
 
-.filter-actions button {
-  padding: 5px 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.filter-actions button:hover {
-  background-color: #007bff;
-  color: white;
-}
-
-.apply-button {
-  background-color: #007bff;
-  color: white;
-}
-
-.reset-button {
-  background-color: #f0f0f0;
-  color: black;
+button {
+  width: 100%;
 }

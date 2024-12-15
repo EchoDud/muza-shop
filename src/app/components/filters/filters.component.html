@@ -4,84 +4,68 @@
   <!-- Категории -->
   <div class="filter-group">
     <h4>Категории:</h4>
-    <ul class="brand-list">
-      <li *ngFor="let category of displayedCategories">
-        <label>
-          <span>{{ category === 'all' ? 'Все' : category }}</span>
-          <input
-            type="checkbox"
-            [checked]="selectedCategories.includes(category)"
-            (change)="toggleSelection(category, selectedCategories)"
-          />
-        </label>
-      </li>
-    </ul>
+    <mat-checkbox
+      *ngFor="let category of displayedCategories"
+      [checked]="selectedCategories.includes(category)"
+      (change)="toggleSelection(category, selectedCategories)"
+    >
+      {{ category === 'all' ? 'Все' : category }}
+    </mat-checkbox>
   </div>
 
   <!-- Бренды -->
   <div class="filter-group">
     <h4>Бренды:</h4>
-    <ul class="brand-list">
-      <li *ngFor="let brand of displayedBrands">
-        <label>
-          <span>{{ brand === 'all' ? 'Все' : brand }}</span>
-          <input
-            type="checkbox"
-            [checked]="selectedBrands.includes(brand)"
-            (change)="toggleSelection(brand, selectedBrands)"
-          />
-        </label>
-      </li>
-    </ul>
+    <mat-checkbox
+      *ngFor="let brand of displayedBrands"
+      [checked]="selectedBrands.includes(brand)"
+      (change)="toggleSelection(brand, selectedBrands)"
+    >
+      {{ brand === 'all' ? 'Все' : brand }}
+    </mat-checkbox>
   </div>
 
   <!-- Модели -->
   <div class="filter-group">
     <h4>Модели:</h4>
-    <ul class="brand-list">
-      <li *ngFor="let model of displayedModels">
-        <label>
-          <span>{{ model === 'all' ? 'Все' : model }}</span>
-          <input
-            type="checkbox"
-            [checked]="selectedModels.includes(model)"
-            (change)="toggleSelection(model, selectedModels)"
-          />
-        </label>
-      </li>
-    </ul>
+    <mat-checkbox
+      *ngFor="let model of displayedModels"
+      [checked]="selectedModels.includes(model)"
+      (change)="toggleSelection(model, selectedModels)"
+    >
+      {{ model === 'all' ? 'Все' : model }}
+    </mat-checkbox>
   </div>
 
   <!-- Цвета -->
   <div class="filter-group">
     <h4>Цвета:</h4>
-    <ul class="brand-list">
-      <li *ngFor="let color of displayedColors">
-        <label>
-          <span>{{ color === 'all' ? 'Все' : color }}</span>
-          <input
-            type="checkbox"
-            [checked]="selectedColors.includes(color)"
-            (change)="toggleSelection(color, selectedColors)"
-          />
-        </label>
-      </li>
-    </ul>
+    <mat-checkbox
+      *ngFor="let color of displayedColors"
+      [checked]="selectedColors.includes(color)"
+      (change)="toggleSelection(color, selectedColors)"
+    >
+      {{ color === 'all' ? 'Все' : color }}
+    </mat-checkbox>
   </div>
 
   <!-- Цена -->
   <div class="filter-group">
-    <label for="price-min">Цена от:</label>
-    <input type="number" id="price-min" [(ngModel)]="priceMin" />
+    <mat-form-field appearance="fill">
+      <mat-label>Цена от</mat-label>
+      <input matInput type="number" [(ngModel)]="priceMin" />
+    </mat-form-field>
   </div>
   <div class="filter-group">
-    <label for="price-max">Цена до:</label>
-    <input type="number" id="price-max" [(ngModel)]="priceMax" />
+    <mat-form-field appearance="fill">
+      <mat-label>Цена до</mat-label>
+      <input matInput type="number" [(ngModel)]="priceMax" />
+    </mat-form-field>
   </div>
 
   <!-- Кнопки -->
   <div class="filter-actions">
-    <button (click)="onApply()">Применить</button>
-    <button (click)="onReset()">Сбросить</button>
+    <button mat-raised-button color="primary" (click)="onApply()">Применить</button>
+    <button mat-raised-button color="warn" (click)="onReset()">Сбросить</button>
   </div>
 </div>
