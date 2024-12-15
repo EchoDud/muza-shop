@@ -1,25 +1,43 @@
 <div class="product-list">
-  <div
+  <mat-card
     class="product-item"
     *ngFor="let product of filteredProducts"
     (click)="onProductClick(product)"
   >
-    <div class="product-image">
-      <ng-container *ngIf="product.imageUrl; else noImage">
-        <img [src]="product.imageUrl" alt="{{ product.model }}" />
-      </ng-container>
-      <ng-template #noImage>
-        <div class="no-image">Нет изображения</div>
-      </ng-template>
-    </div>
-    <div class="product-info">
+    <mat-card-header>
+      <div class="product-image">
+        <ng-container *ngIf="product.imageUrl; else noImage">
+          <img mat-card-image [src]="product.imageUrl" alt="{{ product.model }}" />
+        </ng-container>
+        <ng-template #noImage>
+          <div class="no-image">Нет изображения</div>
+        </ng-template>
+      </div>
+    </mat-card-header>
+    
+    <mat-card-content class="product-info">
       <h3>{{ product.brand }} {{ product.model }}</h3>
       <p>Цвет: {{ product.color }}</p>
       <p>{{ product.description }}</p>
       <p class="price">{{ product.price | currency: 'RUB' }}</p>
-      <button class="buy-button" (click)="onBuyClick(product); $event.stopPropagation()">
-        Купить
-      </button>
-    </div>
-  </div>
+    </mat-card-content>
+
+    <mat-card-actions class="product-actions">
+      <!-- Если товар уже в корзине, показываем управление количеством -->
+      <div *ngIf="cartItems.has(product.id); else addToCartBlock" class="cart-controls">
+        <button mat-raised-button color="primary" (click)="decrementQuantity(product.id); $event.stopPropagation()" [disabled]="(cartItems.get(product.id) ?? 0) <= 1">-</button>
+        
+        <span class="quantity">{{ (cartItems.get(product.id) ?? 0) }} шт.</span>
+        
+        <button mat-raised-button color="primary" (click)="incrementQuantity(product.id); $event.stopPropagation()">+</button>
+        
+        <button mat-raised-button color="warn" (click)="removeFromCart(product.id); $event.stopPropagation()">Убрать</button>
+      </div>
+      
+      <!-- Если товара нет в корзине, показываем кнопку "Купить" -->
+      <ng-template #addToCartBlock>
+        <button mat-raised-button color="accent" (click)="onBuyClick(product); $event.stopPropagation()">Купить</button>
+      </ng-template>
+    </mat-card-actions>
+  </mat-card>
 </div>

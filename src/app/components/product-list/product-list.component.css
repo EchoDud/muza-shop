@@ -2,21 +2,20 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Плитка с минимальной шириной 250px */
   gap: 1.5rem; /* Расстояние между карточками */
-  /* padding: 1rem; */
   box-sizing: border-box;
 }
 
 .product-item {
   display: flex;
-  flex-direction: column; /* Вытягиваем карточки в вертикальном направлении */
-  align-items: center; /* Центрируем содержимое */
-  gap: 1rem;
-  border: 1px solid #ccc;
-  padding: 1rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 400px; /* Фиксированная высота для всех карточек */
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  cursor: pointer; /* Добавляем указатель мыши */
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden; /* Обрезаем все, что выходит за пределы карточки */
 }
 
 .product-item:hover {
@@ -30,8 +29,8 @@
 }
 
 .product-image {
-  width: 200px; /* Картинка растягивается по ширине карточки */
-  height: 200px; /* Фиксированная высота для унификации */
+  width: 100%;
+  height: 200px; /* Фиксированная высота для изображения */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -55,6 +54,8 @@
 
 .product-info {
   text-align: center; /* Центрируем текст */
+  overflow: hidden; /* Скрываем текст, если он выходит за пределы карточки */
+  flex-grow: 1; /* Заполняем пространство карточки */
 }
 
 .product-info h3 {
@@ -67,20 +68,62 @@
   font-weight: bold;
 }
 
-.buy-button {
-  background-color: #ff8c00;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  border-radius: 4px;
-  
+.product-actions {
+  display: flex; 
+  flex-direction: column; /* Располагаем кнопки вертикально */
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%; /* Занимает всю ширину */
 }
 
-.buy-button:hover {
-  background-color: #e67600;
+.cart-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%; /* Контейнер кнопок занимает всю ширину */
 }
 
-.buy-button:active {
-  background-color: #cc5c00;
+.cart-controls button {
+  width: 40px; /* Размер кнопок + и - */
+  height: 40px;
+}
+
+.cart-controls .quantity {
+  font-size: 16px; /* Размер шрифта для количества */
+  margin: 0 10px; /* Отступы между кнопками и количеством */
+}
+
+.cart-controls button.mat-raised-button {
+  width: 100px; /* Размер кнопки "Убрать из корзины" */
+}
+
+.cart-controls button.mat-raised-button.color-primary {
+  width: 40px; /* Размер кнопок + и - */
+}
+
+.cart-controls button.mat-raised-button.color-warn {
+  width: 100px;
+  background-color: #f44336;
+}
+
+.product-actions button {
+  width: 100%; /* Убедимся, что кнопка "Убрать" не выходит за пределы */
+}
+
+/* Медиазапросы для маленьких экранов */
+@media (max-width: 600px) {
+  .cart-controls {
+    flex-direction: column; /* В колонку на мобильных устройствах */
+    align-items: flex-start;
+  }
+
+  .cart-controls button {
+    width: 80%; /* Кнопки становятся шире на маленьких экранах */
+  }
+
+  .cart-controls .quantity {
+    margin: 5px 0;
+  }
 }
