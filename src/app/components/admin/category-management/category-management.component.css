@@ -1,19 +1,37 @@
-.category-management-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .category-form-card,
-  .category-list-card {
-    width: 100%;
-  }
-  
-  mat-form-field {
-    width: 100%;
-  }
-  
-  button {
-    margin-top: 15px;
-  }
-  
+/* Общие стили для карточек */
+mat-card {
+  margin-bottom: 20px;
+}
+
+/* Стили для таблицы категорий */
+mat-table {
+  width: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px; /* Добавим округление углов */
+}
+
+mat-header-row, mat-row {
+  background-color: #fff;
+}
+
+mat-header-cell, mat-cell {
+  padding: 12px;
+}
+
+/* Стили для формы добавления категории */
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+button[type="submit"] {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px; /* Добавим небольшой отступ снизу */
+}
+
+/* Стили для кнопки "Удалить" */
+mat-cell button {
+  width: 100px;
+  margin: 0 auto;
+}

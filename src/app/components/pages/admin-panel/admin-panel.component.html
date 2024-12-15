@@ -1,5 +1,30 @@
-<p>admin-panel works!</p>
-<app-user-management></app-user-management>
-<app-product-management></app-product-management>
-<app-category-management></app-category-management>
-<app-order-management></app-order-management>
+<mat-sidenav-container class="example-container">
+    <!-- Боковое меню (слева) -->
+    <mat-sidenav #sidenav mode="side" opened>
+      <mat-nav-list>
+        <mat-list-item (click)="selectComponent('user-management')">
+          Управление пользователями
+        </mat-list-item>
+        <mat-list-item (click)="selectComponent('product-management')">
+          Управление товарами
+        </mat-list-item>
+        <mat-list-item (click)="selectComponent('category-management')">
+          Управление категориями
+        </mat-list-item>
+        <mat-list-item (click)="selectComponent('order-management')">
+          Управление заказами
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-sidenav>
+  
+    <!-- Основное содержимое -->
+    <mat-sidenav-content>
+      <div class="content">
+        <app-user-management *ngIf="selectedComponent === 'user-management'"></app-user-management>
+        <app-product-management *ngIf="selectedComponent === 'product-management'"></app-product-management>
+        <app-category-management *ngIf="selectedComponent === 'category-management'"></app-category-management>
+        <app-order-management *ngIf="selectedComponent === 'order-management'"></app-order-management>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  

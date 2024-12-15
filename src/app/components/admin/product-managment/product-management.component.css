@@ -1,15 +1,43 @@
+/* Общие стили для карточек */
+mat-card {
+  margin-bottom: 20px;
+}
+
+/* Контейнер для выравнивания элементов */
 .container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  mat-form-field {
-    width: 100%;
-  }
-  
-  .no-data {
-    text-align: center;
-    color: gray;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Стили для таблицы продуктов */
+mat-table {
+  width: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+mat-header-row, mat-row {
+  background-color: #fff;
+}
+
+mat-header-cell, mat-cell {
+  padding: 12px;
+}
+
+/* Стили для формы добавления продукта */
+mat-form-field {
+  width: 100%;
+}
+
+button[type="submit"] {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* Стили для сообщения "Нет данных" */
+.no-data {
+  text-align: center;
+  color: gray;
+}
