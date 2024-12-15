@@ -1,0 +1,41 @@
+<mat-card>
+  <mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+      <mat-cell *matCellDef="let order"> {{ order.id }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="userId">
+      <mat-header-cell *matHeaderCellDef> User ID </mat-header-cell>
+      <mat-cell *matCellDef="let order"> {{ order.userId }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Название товара </mat-header-cell>
+      <mat-cell *matCellDef="let order"> {{ order.name }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef> Цена </mat-header-cell>
+      <mat-cell *matCellDef="let order"> {{ order.price }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="quantity">
+      <mat-header-cell *matHeaderCellDef> Количество </mat-header-cell>
+      <mat-cell *matCellDef="let order"> {{ order.quantity }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef> Статус </mat-header-cell>
+      <mat-cell *matCellDef="let order"> {{ order.status }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="createdDate">
+      <mat-header-cell *matHeaderCellDef> Дата заказа </mat-header-cell>
+      <mat-cell *matCellDef="let order"> {{ order.createdDate | date: 'short' }} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</mat-card>

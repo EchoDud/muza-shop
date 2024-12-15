@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CartItem } from '../models/cart-item.model';
 import { AuthService } from './auth.service';  // Предполагаем, что у вас есть такой сервис
+import { AdminCartItem } from '../models/admin-cart-item';
 
 @Injectable({
   providedIn: 'root',
@@ -88,5 +89,26 @@ export class CartService {
       })
     );
   }
-
+  
+  // Получение истории всех заказов
+  getAllOrderHistory(): Observable<AdminCartItem[]> {
+    const headers = this.getHeaders();
+    return this.http.get<any[]>(`${this.apiUrl}/all-history`, { headers }).pipe(
+      map((orders) => {
+        console.log('Received all orders history:', orders); // Логируем данные
+        return orders.map((order) => ({
+          id: order.id,                             // ID записи
+          productId: order.product.id,             // ID товара
+          name: `${order.product.brand} ${order.product.model}`, // Собираем название товара
+          price: order.price,                      // Цена
+          quantity: order.count,                   // Количество
+          status: order.status,                    // Статус
+          createdDate: order.createdDate,          // Дата создания
+          userId: order.user.id                    // Извлекаем userId из order.user
+        }));
+      })
+    );
+  }
+  
+  
 }
