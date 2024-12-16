@@ -1,0 +1,8 @@
+app-footer {
+    height: 50px;  /* Или другая подходящая высота для футера */
+    background-color: #f1f1f1; /* Примерный фон для футера */
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: auto
+  }
