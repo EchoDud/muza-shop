@@ -14,6 +14,9 @@
         <mat-list-item (click)="selectComponent('order-management')">
           Управление заказами
         </mat-list-item>
+        <mat-list-item (click)="selectComponent('visit-statistics')">
+          Статистика
+        </mat-list-item>
       </mat-nav-list>
     </mat-sidenav>
   
@@ -24,6 +27,7 @@
         <app-product-management *ngIf="selectedComponent === 'product-management'"></app-product-management>
         <app-category-management *ngIf="selectedComponent === 'category-management'"></app-category-management>
         <app-order-management *ngIf="selectedComponent === 'order-management'"></app-order-management>
+        <app-visit-statistics *ngIf="selectedComponent === 'visit-statistics'"></app-visit-statistics>
       </div>
     </mat-sidenav-content>
   </mat-sidenav-container>

@@ -6,6 +6,7 @@ import { OrderManagementComponent } from "../../admin/order-management/order-man
 import { MatSidenavModule } from '@angular/material/sidenav';  // Импортируем MatSidenavModule
 import { MatListModule } from '@angular/material/list';  // Импортируем MatListModule
 import { CommonModule } from '@angular/common';
+import { VisitStatisticsComponent } from "../../admin/visit-stats/visit-stats.component";
 
 @Component({
   selector: 'app-admin-panel',
@@ -16,9 +17,11 @@ import { CommonModule } from '@angular/common';
     ProductManagementComponent,
     CategoryManagementComponent,
     OrderManagementComponent,
-    MatSidenavModule,  // Добавляем MatSidenavModule
-    MatListModule      // Добавляем MatListModule
-  ],
+    MatSidenavModule, // Добавляем MatSidenavModule
+    MatListModule // Добавляем MatListModule
+    ,
+    VisitStatisticsComponent
+],
   templateUrl: './admin-panel.component.html',
   styleUrls: ['./admin-panel.component.css']
 })
