@@ -27,7 +27,7 @@
 
     <ng-container matColumnDef="status">
       <mat-header-cell *matHeaderCellDef> Статус </mat-header-cell>
-      <mat-cell *matCellDef="let order"> {{ order.status }} </mat-cell>
+      <mat-cell *matCellDef="let order"> {{ getStatus(order.status) }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="createdDate">

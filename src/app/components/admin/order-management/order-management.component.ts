@@ -37,4 +37,17 @@ export class OrderManagementComponent implements OnInit {
       }
     );
   }
+
+  getStatus(status: string): string {
+    switch (status) {
+      case 'Paid':
+        return 'Оплачено';
+      case 'Received':
+        return 'Получено';
+      case 'Cancelled':
+        return 'Отменено';
+      default:
+        return 'Неизвестный статус';
+    }
+  }
 }

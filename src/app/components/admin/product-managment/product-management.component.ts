@@ -114,5 +114,7 @@ export class ProductManagementComponent implements OnInit {
     // Проверяем, есть ли у категории дочерние категории, используя нашу Map
     return this.categoryChildrenMap.get(categoryId) || false;
   }
+
+  
   
 }

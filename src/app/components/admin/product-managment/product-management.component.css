@@ -3,14 +3,7 @@ mat-card {
   margin-bottom: 20px;
 }
 
-/* Контейнер для выравнивания элементов */
-.container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-/* Стили для таблицы продуктов */
+/* Стили для таблицы заказов */
 mat-table {
   width: 100%;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -24,6 +17,14 @@ mat-header-row, mat-row {
 mat-header-cell, mat-cell {
   padding: 12px;
 }
+
+/* Контейнер для выравнивания элементов */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 
 /* Стили для формы добавления продукта */
 mat-form-field {
