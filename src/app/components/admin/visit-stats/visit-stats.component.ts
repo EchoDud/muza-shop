@@ -95,8 +95,8 @@ export class VisitStatisticsComponent implements OnInit {
     // Формируем данные для таблицы
     const updatedData = [
       ...this.dataSource.data,
-      { month: `01-${currentYear + 1}`, visitsCount: nextValue }, // Январь
-      { month: `02-${currentYear + 1}`, visitsCount: newValue }  // Февраль
+      { month: `${currentYear + 1}-01`, visitsCount: nextValue }, // Январь
+      { month: `${currentYear + 1}-02`, visitsCount: newValue }  // Февраль
     ];
   
     // Обновляем таблицу
