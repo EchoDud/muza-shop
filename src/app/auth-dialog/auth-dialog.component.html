@@ -1,10 +1,12 @@
 <h1 mat-dialog-title>Авторизация или Регистрация</h1>
 
-<mat-dialog-content>
+<mat-dialog-content class="dialog-content">
   <p>Вы не авторизованы. Пожалуйста, войдите в свой аккаунт:</p>
-  <button (click)="auth()">Авторизация</button>
+  <div class="auth-actions">
+    <button mat-raised-button color="accent" (click)="auth()">Авторизация</button>
+  </div>
 </mat-dialog-content>
 
-<mat-dialog-actions>
+<mat-dialog-actions align="end">
   <button mat-button (click)="close()">Закрыть</button>
 </mat-dialog-actions>
