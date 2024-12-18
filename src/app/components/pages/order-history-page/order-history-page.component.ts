@@ -6,12 +6,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 
 @Component({
   selector: 'app-order-history',
   templateUrl: './order-history-page.component.html',
   styleUrls: ['./order-history-page.component.css'],
-  imports: [CommonModule, MatCardModule, MatListModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, MatCardModule, MatListModule, MatButtonModule, MatIconModule, MatExpansionModule],
   standalone: true,
 })
 export class OrderHistoryPageComponent implements OnInit {
@@ -38,22 +40,26 @@ export class OrderHistoryPageComponent implements OnInit {
 
   // Группировка заказов по времени
   groupOrdersByDate(): void {
-    const grouped = this.orders.reduce((acc: { [key: string]: CartItem[] }, order) => {  // Указан тип для аккумулятора
+    const grouped = this.orders.reduce((acc: { [key: string]: { items: CartItem[]; total: number } }, order) => {
       if (order.createdDate) {
         const formattedDate = this.formatDate(order.createdDate);
         if (!acc[formattedDate]) {
-          acc[formattedDate] = [];
+          acc[formattedDate] = { items: [], total: 0 };
         }
-        acc[formattedDate].push(order);
+        acc[formattedDate].items.push(order);
+        acc[formattedDate].total += order.price * order.quantity;
       }
       return acc;
     }, {});
-  
-    // Преобразуем объект в массив для отображения
-    this.groupedOrders = Object.keys(grouped).map(key => ({
-      date: key,
-      orders: grouped[key]
-    }));
+
+    // Преобразуем объект в массив, сортируем по убыванию даты и добавляем общую стоимость
+    this.groupedOrders = Object.keys(grouped)
+      .map(key => ({
+        date: key,
+        orders: grouped[key].items,
+        totalPrice: grouped[key].total
+      }))
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); // Сортировка по дате
   }
 
   // Форматируем дату до секунд
@@ -61,4 +67,18 @@ export class OrderHistoryPageComponent implements OnInit {
     const d = new Date(date);
     return d.toISOString().split('.')[0]; // Форматируем до секунд
   }
+
+  getStatus(status: string): string {
+    switch (status) {
+      case 'Paid':
+        return 'Оплачено';
+      case 'Received':
+        return 'Получено';
+      case 'Cancelled':
+        return 'Отменено';
+      default:
+        return 'Неизвестный статус';
+    }
+  }
+
 }
